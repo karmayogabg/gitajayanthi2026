@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ॐ கீதா ஜயந்தி 2026 - கட்டணம் (Payment)</title>
+    <meta name="description" content="கீதா ஜயந்தி 2026 போட்டிகளுக்கான கட்டணப் பக்கம். UPI ID மற்றும் QR குறியீடு மூலமாக எளிதாகப் பணம் செலுத்தலாம்.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Mukta+Malar:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #d97706; /* Saffron */
+            --primary-dark: #b45309;
+            --secondary: #eab308; /* Gold */
+            --accent: #f97316; /* Orange */
+            --bg: #0f172a; /* Slate 900 */
+            --card-bg: #1e293b; /* Slate 800 */
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+            --font-title: 'Cinzel', serif;
+            --font-tamil: 'Mukta Malar', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(217, 119, 6, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(234, 179, 8, 0.1) 0%, transparent 45%);
+            background-attachment: fixed;
+        }
+
+        .payment-card {
+            background-color: rgba(30, 41, 59, 0.85);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 35px 25px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .symbol {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: 1.6rem;
+            color: var(--secondary);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-family: var(--font-tamil);
+            font-size: 1.25rem;
+            color: var(--text);
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        /* QR Code Styling */
+        .qr-section {
+            background: white;
+            padding: 15px;
+            border-radius: 18px;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .qr-section:hover {
+            transform: scale(1.02);
+        }
+
+        .qr-image {
+            width: 220px;
+            height: 220px;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .qr-label {
+            font-family: var(--font-tamil);
+            color: #0f172a;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 10px;
+            display: block;
+        }
+
+        /* Fee details list */
+        .fee-details {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .fee-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-family: var(--font-body);
+        }
+
+        .fee-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .fee-item .label {
+            color: var(--text-muted);
+            font-family: var(--font-tamil);
+        }
+
+        .fee-item .price {
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* Notification / Banner */
+        .alert-banner {
+            background: rgba(217, 119, 6, 0.15);
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            text-align: left;
+            margin-bottom: 25px;
+            color: #fed7aa;
+            font-family: var(--font-tamil);
+        }
+
+        /* Copy Buttons & Inputs */
+        .copy-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .copy-field {
+            display: flex;
+            align-items: center;
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 8px 8px 8px 16px;
+            justify-content: space-between;
+            transition: border-color 0.2s ease;
+        }
+
+        .copy-field:hover {
+            border-color: var(--primary);
+        }
+
+        .field-details {
+            text-align: left;
+        }
+
+        .field-title {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .field-value {
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: var(--font-body);
+            color: var(--text);
+            user-select: all;
+        }
+
+        .btn-copy {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-tamil);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-copy:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-copy:active {
+            transform: translateY(1px);
+        }
+
+        .btn-copy.copied {
+            background-color: #10b981; /* Success Green */
+        }
+
+        /* Direct app button fallback warning */
+        .btn-direct {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: var(--font-tamil);
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-direct:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 119, 6, 0.4);
+        }
+
+        .btn-direct:active {
+            transform: translateY(0);
+        }
+
+        .disclaimer {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            font-family: var(--font-tamil);
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #10b981;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: var(--font-tamil);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            bottom: 30px;
+        }
+
+        @media (max-width: 480px) {
+            .payment-card {
+                padding: 25px 15px;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            .qr-image {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="payment-card">
+        <div class="symbol">ॐ</div>
+        <h1>கீதா ஜயந்தி 2026</h1>
+        <div class="subtitle">போட்டி முன்பதிவு கட்டணம்</div>
+
+        <!-- Alert Banner explaining the security issue -->
+        <div class="alert-banner">
+            ⚠️ <strong>முக்கிய குறிப்பு:</strong> மொபைலில் சில UPI செயலிகள் (PhonePe / GPay) இணையதள இணைப்புகள் மூலமாக செலுத்துவதை பாதுகாப்பு காரணங்களுக்காக தற்காலிகமாக தடை செய்திருக்கலாம். எனவே, <strong>QR குறியீட்டை ஸ்கேன் செய்வது</strong> அல்லது <strong>UPI ஐடியை நகலெடுத்து</strong> உங்கள் செயலியில் செலுத்துவதே மிகவும் பாதுகாப்பான மற்றும் எளிதான வழியாகும்.
+        </div>
+
+        <!-- Fee Details List -->
+        <div class="fee-details">
+            <div class="fee-item">
+                <span class="label">1. ஸ்லோகங்கள் மனப்பாடம் (Shloka Recitation)</span>
+                <span class="price">₹11</span>
+            </div>
+            <div class="fee-item">
+                <span class="label">2. வினாடி வினா (Quiz - Team of 3)</span>
+                <span class="price">₹51</span>
+            </div>
+            <div class="fee-item">
+                <span class="label">3. ஸ்லோக விளக்கம் (Shloka Explanation)</span>
+                <span class="price">₹51</span>
+            </div>
+        </div>
+
+        <!-- High-Quality QR Code (Scanning works 100%) -->
+        <div class="qr-section">
+            <img src="payment_fixed.png" alt="Bhagavad Gita 2026 UPI QR Code" class="qr-image">
+            <span class="qr-label">Scan to Pay using GPay / PhonePe / Paytm</span>
+        </div>
+
+        <!-- Copyable Fields -->
+        <div class="copy-group">
+            <!-- UPI ID -->
+            <div class="copy-field">
+                <div class="field-details">
+                    <div class="field-title">UPI ID (VPA)</div>
+                    <div class="field-value" id="upiIdText">9403940959@ibl</div>
+                </div>
+                <button class="btn-copy" onclick="copyText('upiIdText', this)">
+                    <span>📋</span> நகலெடு
+                </button>
+            </div>
+
+            <!-- Mobile Number -->
+            <div class="copy-field">
+                <div class="field-details">
+                    <div class="field-title">Mobile Number (PhonePe/GPay)</div>
+                    <div class="field-value" id="phoneText">9403940959</div>
+                </div>
+                <button class="btn-copy" onclick="copyText('phoneText', this)">
+                    <span>📋</span> நகலெடு
+                </button>
+            </div>
+        </div>
+
+        <!-- Direct UPI link button (Fallback) -->
+        <a href="upi://pay?pa=9403940959@ibl&pn=Gitaamrutanand&cu=INR&tn=Gita%20Jayanthi%202026" class="btn-direct" id="payDirectBtn">
+            ⚡ நேரடிப் பணம் செலுத்துதல் (Direct App Pay)
+        </a>
+        <div class="disclaimer">
+            (இது உங்கள் மொபைலில் உள்ள UPI செயலியைத் திறக்கும். பிழை ஏற்பட்டால், மேலே உள்ள UPI ஐடி அல்லது மொபைல் எண்ணை நகலெடுத்து செலுத்தவும்.)
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">நகலெடுக்கப்பட்டது! (Copied!)</div>
+
+    <script>
+        function copyText(elementId, btn) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            
+            // Standard clipboard API
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showToast();
+                
+                // Visual feedback on button
+                const originalContent = btn.innerHTML;
+                btn.innerHTML = '✓ நகலெடுக்கப்பட்டது';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalContent;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
