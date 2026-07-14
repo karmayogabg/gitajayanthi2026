@@ -253,40 +253,7 @@
             background-color: #10b981; /* Success Green */
         }
 
-        /* Direct app button fallback warning */
-        .btn-direct {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            text-decoration: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 20px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1rem;
-            font-family: var(--font-tamil);
-            margin-bottom: 12px;
-            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
-            transition: all 0.3s ease;
-        }
 
-        .btn-direct:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(217, 119, 6, 0.4);
-        }
-
-        .btn-direct:active {
-            transform: translateY(0);
-        }
-
-        .disclaimer {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-            font-family: var(--font-tamil);
-        }
 
         /* Toast notification */
         .toast {
@@ -383,13 +350,7 @@
             </div>
         </div>
 
-        <!-- Direct UPI link button (Fallback) -->
-        <a href="upi://pay?pa=9403940959@ibl&pn=Gitaamrutanand&cu=INR&tn=Gita%20Jayanthi%202026" class="btn-direct" id="payDirectBtn">
-            ⚡ நேரடிப் பணம் செலுத்துதல் (Direct App Pay)
-        </a>
-        <div class="disclaimer">
-            (இது உங்கள் மொபைலில் உள்ள UPI செயலியைத் திறக்கும். பிழை ஏற்பட்டால், மேலே உள்ள UPI ஐடி அல்லது மொபைல் எண்ணை நகலெடுத்து செலுத்தவும்.)
-        </div>
+
     </div>
 
     <!-- Toast Notification -->
