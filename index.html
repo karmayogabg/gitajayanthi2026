@@ -487,6 +487,38 @@
             border-bottom: 1px solid var(--border);
         }
 
+        .shloka-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 0 auto 30px auto;
+            flex-wrap: wrap;
+            max-width: 800px;
+        }
+
+        .shloka-tab {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .shloka-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .shloka-tab.active {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
         .search-container {
             max-width: 500px;
             margin: 0 auto 40px auto;
@@ -1107,12 +1139,13 @@
                     <ul class="tamil-text">
                         <li>மூன்று பேர் கொண்ட குழுவாக மட்டுமே பங்கேற்க முடியும் (அணிவாரி).</li>
                         <li><b>பாடத்திட்டம்:</b> கீதை விஷயமாக 382 கேள்விகள் அடங்கிய புத்தகம்.</li>
-                        <li>பதிவு செய்யும் அணிகளுக்கு இப்புத்தகம் PDF வடிவில் மின்னஞ்சலில் அனுப்பி வைக்கப்படும்.</li>
+                        <li><b>பாடப் புத்தகம்:</b> கீழே உள்ள பொத்தானை அழுத்திப் புத்தகத்தை (PDF) பதிவிறக்கம் செய்து கொள்ளலாம்.</li>
                         <li>ஆரம்பச் சுற்றுகளில் வாய்மொழித் தேர்வு (Oral) மட்டுமே நடைபெறும்.</li>
                         <li>இறுதிச் சுற்றில் எழுத்துத் தேர்வு (Written) மற்றும் மேடைச் சுற்றுகள் இருக்கும்.</li>
                     </ul>
                 </div>
-                <div class="comp-footer">
+                <div class="comp-footer" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="Gita_Quiz_Book.pdf" download class="btn btn-secondary tamil-text" style="background-color: #475569; border-color: #475569;">📥 புத்தகத்தை பதிவிறக்கு</a>
                     <a href="#register" class="btn btn-secondary tamil-text" onclick="selectComp('quiz')">அணியை பதிவு செய்</a>
                 </div>
             </div>
@@ -1145,8 +1178,14 @@
     <section class="section-padding shlokas-section" id="shlokas">
         <div class="container">
             <div class="section-title-wrapper">
-                <h2 class="section-title tamil-text">18 முக்கிய ஶ்லோகங்கள்</h2>
-                <p class="section-desc tamil-text">ஶ்லோக விளக்கப் போட்டிக்கு கீழே உள்ள 18 ஶ்லோகங்களில் ஒன்றை தேர்ந்தெடுக்க வேண்டும். அவற்றைப் படித்துத் தெரிந்து கொள்ள கார்டுகளை கிளிக் செய்யவும்.</p>
+                <h2 class="section-title tamil-text" id="shlokaSectionTitle">போட்டி 03: 18 முக்கிய ஶ்லோகங்கள்</h2>
+                <p class="section-desc tamil-text" id="shlokaSectionDesc">ஶ்லோக விளக்கப் போட்டிக்கு கீழே உள்ள 18 ஶ்லோகங்களில் ஒன்றை தேர்ந்தெடுக்க வேண்டும். அவற்றைப் படித்துத் தெரிந்து கொள்ள கார்டுகளை கிளிக் செய்யவும்.</p>
+            </div>
+
+            <div class="shloka-tabs tamil-text">
+                <button class="shloka-tab active" id="tab-comp3" onclick="switchShlokaTab('comp3')">போட்டி 03: 18 ஶ்லோகங்கள் (விளக்கம்)</button>
+                <button class="shloka-tab" id="tab-comp1-bala" onclick="switchShlokaTab('comp1_bala')">போட்டி 01: பால பிரிவு (மனப்பாடம்)</button>
+                <button class="shloka-tab" id="tab-comp1-taruna" onclick="switchShlokaTab('comp1_taruna')">போட்டி 01: தருண பிரிவு (மனப்பாடம்)</button>
             </div>
 
             <div class="search-container">
@@ -1286,145 +1325,436 @@
                 chapter: 1, verse: 1,
                 ref: "அத்தியாயம் 1, ஶ்லோகம் 1 (அர்ஜுனவிஷாத யோகம்)",
                 title: "Dharmakshetre Kurukshetre",
-                sanskrit: "धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय ॥",
-                trans: "dharmakṣētrē kurukṣētrē samavētā yuyutsavaḥ .\nmāmakāḥ pāṇḍavāścaiva kimakurvata sañjaya ||",
-                meaning: "திருதராஷ்டிரன் கூறினான்: ஓ சஞ்ஜயா! தர்ம பூமியாகிய குருக்ஷேத்திரத்தில், போரிட விரும்பி ஒன்று கூடி நின்ற என் மகன்களும் பாண்டுவின் மகன்களும் என்ன செய்தார்கள்?"
+                sanskrit: "धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।
+मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय ॥",
+                trans: "dharmakṣētrē kurukṣētrē samavētā yuyutsavaḥ .
+māmakāḥ pāṇḍavāścaiva kimakurvata sañjaya ||",
+                meaning: "திருதராஷ்டிரன் கூறினான்: ஓ சஞ்ஜயா! தர்ம பூமியாகிய குருக்ஷேத்திரத்தில், போரிட விரும்பி ஒன்று கூடி நின்ற என் மகன்களும் பாண்டுவின் மகன்களும் என்ன செய்தார்கள்?",
+                categories: ["comp3"]
             },
             {
                 chapter: 2, verse: 47,
                 ref: "அத்தியாயம் 2, ஶ்லோகம் 47 (ஸாங்க்ய யோகம்)",
                 title: "Karmanyevadhikaraste",
-                sanskrit: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन ।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि ॥",
-                trans: "karmaṇyēvādhikāraste mā phalēṣu kadācana .\nmā karmaphalahēturbhūrmā tē saṅgō'stvakarmaṇi ||",
-                meaning: "உனக்கு விதிக்கப்பட்ட கடமையைச் செய்ய மட்டுமே உனக்கு அதிகாரம் உண்டு, ஆனால் அதன் பயன்களில் ஒருபோதும் உரிமை இல்லை. உனது செயல்களின் பலனுக்கு உன்னை நீ காரணியாக்கிக் கொள்ளாதே. கடமைகளைச் செய்யாமல் சோம்பேறியாக இருப்பதிலும் பற்று கொள்ளாதே."
+                sanskrit: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन ।
+मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि ॥",
+                trans: "karmaṇyēvādhikāraste mā phalēṣu kadācana .
+mā karmaphalahēturbhūrmā tē saṅgō'stvakarmaṇi ||",
+                meaning: "உனக்கு விதிக்கப்பட்ட கடமையைச் செய்ய மட்டுமே உனக்கு அதிகாரம் உண்டு, ஆனால் அதன் பயன்களில் ஒருபோதும் உரிமை இல்லை. உனது செயல்களின் பலனுக்கு உன்னை நீ காரணியாக்கிக் கொள்ளாதே. கடமைகளைச் செய்யாமல் சோம்பேறியாக இருப்பதிலும் பற்று கொள்ளாதே.",
+                categories: ["comp3", "comp1_bala"]
+            },
+            {
+                chapter: 2, verse: 54,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 54 (ஸாங்க்ய யோகம்)",
+                title: "Arjuna Uvāca Sthitaprajñasya",
+                sanskrit: "अर्जुन उवाच |
+स्थितप्रज्ञस्य का भाषा समाधिस्थस्य केशव |
+स्थितधीः किं प्रभाषेत किमासीत व्रजेत किम् ||२-५४||",
+                trans: "arjuna uvāca  .
+sthitaprajñasya kā bhāṣā samādhisthasya keśava  .
+sthitadhīḥ kiṃ prabhāṣeta kimāsīta vrajeta kim  | |2-54 | |",
+                meaning: "அர்ஜுன் கூறினார்: ஓ கேஶவா, தெய்வீக உணர்வில் நிலைத்திருப்பவரின் மனநிலை என்ன? ஒரு நபர் எப்படி பேசுவார்? அவர் எப்படி நடக்கிறார்?",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 55,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 55 (ஸாங்க்ய யோகம்)",
+                title: "Śrībhagavānuvāca Prajahāti Yadā",
+                sanskrit: "श्रीभगवानुवाच |
+प्रजहाति यदा कामान्सर्वान्पार्थ मनोगतान् |
+आत्मन्येवात्मना तुष्टः स्थितप्रज्ञस्तदोच्यते ||२-५५||",
+                trans: "śrībhagavānuvāca  .
+prajahāti yadā kāmānsarvānpārtha manogatān  .
+ātmanyevātmanā tuṣṭaḥ sthitaprajñastadocyate  | |2-55 | |",
+                meaning: "பகவான் கூறினார்: ஒருவன் மனதைத் துன்புறுத்தும் புலன்களின் அனைத்து சுயநல ஆசைகளையும், வேட்கைகளையும் நிராகரித்து சுயத்தை உணர்ந்து திருப்தி அடையும் போது, ​​அத்தகைய நபர் ஆழ்நிலையில் இருக்கிறார் என்று கூறப்படுகிறது.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 56,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 56 (ஸாங்க்ய யோகம்)",
+                title: "Duḥkheṣvanudvignamanāḥ Sukheṣu Vigataspṛhaḥ",
+                sanskrit: "दुःखेष्वनुद्विग्नमनाः सुखेषु विगतस्पृहः |
+वीतरागभयक्रोधः स्थितधीर्मुनिरुच्यते ||२-५६||",
+                trans: "duḥkheṣvanudvignamanāḥ sukheṣu vigataspṛhaḥ  .
+vītarāgabhayakrodhaḥ sthitadhīrmunirucyate  | |2-56 | |",
+                meaning: "எவருடைய மனம் துன்பங்களுக்கு மத்தியில் கலக்கமில்லாமல் இருக்கிறதோ,  இன்பத்திற்காக ஏங்காமல், பற்று, பயம், மற்றும் கோபம் அற்று இருக்கிறதோ அவர் நிலையான ஞானமுள்ள ஞானி என்று அழைக்கப்படுகிறார்.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 57,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 57 (ஸாங்க்ய யோகம்)",
+                title: "Yaḥ Sarvatrānabhisnehastattatprāpya Śubhāśubham",
+                sanskrit: "यः सर्वत्रानभिस्नेहस्तत्तत्प्राप्य शुभाशुभम् |
+नाभिनन्दति न द्वेष्टि तस्य प्रज्ञा प्रतिष्ठिता ||२-५७||",
+                trans: "yaḥ sarvatrānabhisnehastattatprāpya śubhāśubham  .
+nābhinandati na dveṣṭi tasya prajñā pratiṣṭhitā  | |2-57 | |",
+                meaning: "எவர் எல்லா நிலைகளிலும் பற்றற்று, நல்ல அதிர்ஷ்டத்தால் மகிழ்ச்சி அடையாமல் மற்றும் இன்னல்களால் மனச் சோர்வு அடையாமல் இருக்கிறாரோ அவர் முழுமையான, நிலையான அறிவை கொண்ட ஞானி ஆவார்.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 58,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 58 (ஸாங்க்ய யோகம்)",
+                title: "Yadā Saṃharate Cāyaṃ",
+                sanskrit: "यदा संहरते चायं कूर्मोऽङ्गानीव सर्वशः |
+इन्द्रियाणीन्द्रियार्थेभ्यस्तस्य प्रज्ञा प्रतिष्ठिता ||२-५८||",
+                trans: "yadā saṃharate cāyaṃ kūrmo .aṅgānīva sarvaśaḥ  .
+indriyāṇīndriyārthebhyastasya prajñā pratiṣṭhitā  | |2-58 | |",
+                meaning: "புலன்களை அவற்றின் பொருள்களிலிருந்து விலக்கிக் கொள்ளக்கூடியவன், ஆமை தன் உறுப்புகளை ஓட்டுக்குள் பின் இழுத்துக் கொள்வது போல, தெய்வீக ஞானத்தில் நிலைபெற்றுள்ளான்.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 59,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 59 (ஸாங்க்ய யோகம்)",
+                title: "Viṣayā Vinivartante Nirāhārasya",
+                sanskrit: "विषया विनिवर्तन्ते निराहारस्य देहिनः |
+रसवर्जं रसोऽप्यस्य परं दृष्ट्वा निवर्तते ||२-५९||",
+                trans: "viṣayā vinivartante nirāhārasya dehinaḥ  .
+rasavarjaṃ raso .apyasya paraṃ dṛṣṭvā nivartate  | |2-59 | |",
+                meaning: "ஆர்வமுள்ளவர்கள் தங்கள் இன்பப் பொருட்களிலிருந்து புலன்களைக் கட்டுப் படுத்தினாலும், புலன் பொருள்களுக்கான சுவை எஞ்சியுள்ளது. இருப்பினும், பரமத்தை உணர்ந்தவர்களுக்கு இந்த சுவை கூட நின்றுவிடுகிறது.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 60,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 60 (ஸாங்க்ய யோகம்)",
+                title: "Yatato Hyapi Kaunteya",
+                sanskrit: "यततो ह्यपि कौन्तेय पुरुषस्य विपश्चितः |
+इन्द्रियाणि प्रमाथीनि हरन्ति प्रसभं मनः ||२-६०||",
+                trans: "yatato hyapi kaunteya puruṣasya vipaścitaḥ  .
+indriyāṇi pramāthīni haranti prasabhaṃ manaḥ  | |2-60 | |",
+                meaning: "குந்தியின் மகனே, புலன்கள் மிகவும் வலுவாகவும், கொந்தளிப்பாகவும் உள்ளன, அவை பாகுபாடு மற்றும் தன்னடக்கத்தைக் கடைப்பிடிக்கும் ஒரு நபரின் மனதைக் கூட வலுக்கட்டாயமாக எடுத்துச் செல்ல முடியும்.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 61,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 61 (ஸாங்க்ய யோகம்)",
+                title: "Tāni Sarvāṇi Saṃyamya",
+                sanskrit: "तानि सर्वाणि संयम्य युक्त आसीत मत्परः |
+वशे हि यस्येन्द्रियाणि तस्य प्रज्ञा प्रतिष्ठिता ||२-६१||",
+                trans: "tāni sarvāṇi saṃyamya yukta āsīta matparaḥ  .
+vaśe hi yasyendriyāṇi tasya prajñā pratiṣṭhitā  | |2-61 | |",
+                meaning: "அவர்கள் பரிபூரண அறிவில் நிலைநிறுத்தப்பட்டவர்கள், அவர்கள் தங்கள் புலன்களை அடக்கி, தங்கள் மனதை எப்போதும் என்னில் லயித்து வைத்திருக்கிறார்கள்.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 62,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 62 (ஸாங்க்ய யோகம்)",
+                title: "Dhyāyato Viṣayānpuṃsaḥ Saṅgasteṣūpajāyate",
+                sanskrit: "ध्यायतो विषयान्पुंसः सङ्गस्तेषूपजायते |
+सङ्गात्सञ्जायते कामः कामात्क्रोधोऽभिजायते ||२-६२||",
+                trans: "dhyāyato viṣayānpuṃsaḥ saṅgasteṣūpajāyate  .
+saṅgātsañjāyate kāmaḥ kāmātkrodho .abhijāyate  | |2-62 | |",
+                meaning: "புலன்களின் பொருள்களைப் பற்றி சிந்திக்கும்போது, ​​​​அவற்றின் மீது பற்று வளர்கிறது. பற்றுதல் ஆசைக்கு வழிவகுக்கிறது, ஆசையிலிருந்து கோபம் எழுகிறது.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 63,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 63 (ஸாங்க்ய யோகம்)",
+                title: "Krodhādbhavati Sammohaḥ Sammohātsmṛtivibhramaḥ",
+                sanskrit: "क्रोधाद्भवति सम्मोहः सम्मोहात्स्मृतिविभ्रमः |
+स्मृतिभ्रंशाद् बुद्धिनाशो बुद्धिनाशात्प्रणश्यति ||२-६३||",
+                trans: "krodhādbhavati sammohaḥ sammohātsmṛtivibhramaḥ  .
+smṛtibhraṃśād buddhināśo buddhināśātpraṇaśyati  | |2-63 | |",
+                meaning: "கோபம்  பகுத்தறிவின் மேகமூட்டத்திற்கு வழிவகுக்கிறது, இதன் விளைவாக நினைவுத் திறன் குழப்பமடைகிறது. நினைவாற்றல் குழப்பமடையும் போது, ​​புத்தி அழிந்துவிடும்; மற்றும் புத்தி அழிந்தால், ஒருவன் பாழாகிறான்.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 64,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 64 (ஸாங்க்ய யோகம்)",
+                title: "Rāgadveṣavimuktaistu Viṣayānindriyaiścaran Orviyuktaistu",
+                sanskrit: "रागद्वेषविमुक्तैस्तु विषयानिन्द्रियैश्चरन् | (or वियुक्तैस्तु)
+आत्मवश्यैर्विधेयात्मा प्रसादमधिगच्छति ||२-६४||",
+                trans: "rāgadveṣavimuktaistu viṣayānindriyaiścaran  .
+orviyuktaistu ātmavaśyairvidheyātmā prasādamadhigacchati  | |2-64 | |",
+                meaning: "ஆனால் மனதைக் கட்டுப்படுத்தி, பற்றுதல் மற்றும் வெறுப்பு இல்லாதவர், புலன்களின் பொருட்களைப் பயன்படுத்தும்போது கூட, கடவுளின் அருளைப் பெறுகிறார்.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 65,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 65 (ஸாங்க்ய யோகம்)",
+                title: "Prasāde Sarvaduḥkhānāṃ Hānirasyopajāyate",
+                sanskrit: "प्रसादे सर्वदुःखानां हानिरस्योपजायते |
+प्रसन्नचेतसो ह्याशु बुद्धिः पर्यवतिष्ठते ||२-६५||",
+                trans: "prasāde sarvaduḥkhānāṃ hānirasyopajāyate  .
+prasannacetaso hyāśu buddhiḥ paryavatiṣṭhate  | |2-65 | |",
+                meaning: "தெய்வீக அருளால் அனைத்து துக்கங்களும் முடிவடையும் அமைதி வருகிறது, அமைதியான மனதுடைய ஒருவரின் புத்தி விரைவில் கடவுளிடம் உறுதியாக நிலைநிறுத்தப்படுகிறது.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 66,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 66 (ஸாங்க்ய யோகம்)",
+                title: "Nāsti Buddhirayuktasya Na",
+                sanskrit: "नास्ति बुद्धिरयुक्तस्य न चायुक्तस्य भावना |
+न चाभावयतः शान्तिरशान्तस्य कुतः सुखम् ||२-६६||",
+                trans: "nāsti buddhirayuktasya na cāyuktasya bhāvanā  .
+na cābhāvayataḥ śāntiraśāntasya kutaḥ sukham  | |2-66 | |",
+                meaning: "ஆனால் மனதையும் புலன்களையும் கட்டுப்படுத்தாத ஒழுக்கமற்ற ஒருவரால் உறுதியான புத்தியோ அல்லது நிலையான சிந்தனையோ கடவுள் மீது இருக்க முடியாது. கடவுளோடு மனதை ஒருக்காலும் இணைக்காதவனுக்கு அமைதி இல்லை; அமைதி இல்லாதவர் எப்படி மகிழ்ச்சியாக இருக்க முடியும்?",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 67,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 67 (ஸாங்க்ய யோகம்)",
+                title: "Indriyāṇāṃ Hi Caratāṃ",
+                sanskrit: "इन्द्रियाणां हि चरतां यन्मनोऽनुविधीयते |
+तदस्य हरति प्रज्ञां वायुर्नावमिवाम्भसि ||२-६७||",
+                trans: "indriyāṇāṃ hi caratāṃ yanmano .anuvidhīyate  .
+tadasya harati prajñāṃ vāyurnāvamivāmbhasi  | |2-67 | |",
+                meaning: "பலத்த காற்று படகை அதன் பட்டயப் பாதையில் இருந்து தண்ணீரில் அடித்துச் செல்வது போல, மனம் ஒருமுகப்படுத்தும் புலன்களில் ஏதாவது ஒரு   புலனை  பற்றி தொடர்ந்து சிந்திப்பது கூட புத்தியை வழிதவறச் செய்துவிடும். க1டோ2ப1நிஷத3ம் கூறுகிறது,",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 68,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 68 (ஸாங்க்ய யோகம்)",
+                title: "Tasmādyasya Mahābāho Nigṛhītāni",
+                sanskrit: "तस्माद्यस्य महाबाहो निगृहीतानि सर्वशः |
+इन्द्रियाणीन्द्रियार्थेभ्यस्तस्य प्रज्ञा प्रतिष्ठिता ||२-६८||",
+                trans: "tasmādyasya mahābāho nigṛhītāni sarvaśaḥ  .
+indriyāṇīndriyārthebhyastasya prajñā pratiṣṭhitā  | |2-68 | |",
+                meaning: "எனவே, புலன்களை அவற்றின் பொருட்களிலிருந்து கட்டுப்படுத்தியவன், ஓ வலிமைமிக்க கைகளைக் கொண்ட அர்ஜுனனே, ஆழ்நிலை அறிவில் உறுதியாக நிலைபெற்றுள்ளான்.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 69,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 69 (ஸாங்க்ய யோகம்)",
+                title: "Yā Niśā Sarvabhūtānāṃ",
+                sanskrit: "या निशा सर्वभूतानां तस्यां जागर्ति संयमी |
+यस्यां जाग्रति भूतानि सा निशा पश्यतो मुनेः ||२-६९||",
+                trans: "yā niśā sarvabhūtānāṃ tasyāṃ jāgarti saṃyamī  .
+yasyāṃ jāgrati bhūtāni sā niśā paśyato muneḥ  | |2-69 | |",
+                meaning: "எல்லா உயிரினங்களும் பகல் என்று கருதுவது ஞானிகளுக்கு அறியாமையின் இரவாகும், மேலும் அனைத்து உயிரினங்களும் இரவாகக் காணும் பகல் என்பது உள்முக ஞானிக்கு பகலாகும்.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 70,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 70 (ஸாங்க்ய யோகம்)",
+                title: "Āpūryamāṇamacalapratiṣṭhaṃ Samudramāpaḥ Praviśanti",
+                sanskrit: "आपूर्यमाणमचलप्रतिष्ठं
+समुद्रमापः प्रविशन्ति यद्वत् |
+तद्वत्कामा यं प्रविशन्ति सर्वे
+स शान्तिमाप्नोति न कामकामी ||२-७०||",
+                trans: "āpūryamāṇamacalapratiṣṭhaṃ samudramāpaḥ praviśanti yadvat  .
+tadvatkāmā yaṃ praviśanti sarve sa śāntimāpnoti na kāmakāmī  | |2-70 | |",
+                meaning: "நதிகளில் இருந்து வரும் நீரின் இடைவிடாத நீரோட்டத்தால் கடல் கலங்காமல் இருப்பது போல, தன்னைச் சுற்றி விரும்பத்தக்க பொருள்கள் இருந்தாலும் ஆசைகளைத் திருப்திப்படுத்த முயற்சி செய்யாமல் அவைகளால் பாதிக்கப்படாமல்  இருக்கும் முனிவர் அமைதியை அடைகிறார்.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 71,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 71 (ஸாங்க்ய யோகம்)",
+                title: "Vihāya Kāmānyaḥ Sarvānpumāṃścarati",
+                sanskrit: "विहाय कामान्यः सर्वान्पुमांश्चरति निःस्पृहः |
+निर्ममो निरहङ्कारः स शान्तिमधिगच्छति ||२-७१||",
+                trans: "vihāya kāmānyaḥ sarvānpumāṃścarati niḥspṛhaḥ  .
+nirmamo nirahaṅkāraḥ sa śāntimadhigacchati  | |2-71 | |",
+                meaning: "ஒருவன் தன் பொருள் ஆசைகள் அனைத்தையும் துறந்து, புலன் இன்பத்திற்கான ஏக்கமும், உரிமை உணர்வும், அகங்காரமும் இல்லாதவனாக இருந்தால், அவன் பூரண அமைதியை அடைய முடியும்.",
+                categories: ["comp1_taruna"]
+            },
+            {
+                chapter: 2, verse: 72,
+                ref: "அத்தியாயம் 2, ஶ்லோகம் 72 (ஸாங்க்ய யோகம்)",
+                title: "Eṣā Brāhmī Sthitiḥ",
+                sanskrit: "एषा ब्राह्मी स्थितिः पार्थ नैनां प्राप्य विमुह्यति |
+स्थित्वास्यामन्तकालेऽपि ब्रह्मनिर्वाणमृच्छति ||२-७२||",
+                trans: "eṣā brāhmī sthitiḥ pārtha naināṃ prāpya vimuhyati  .
+sthitvāsyāmantakāle .api brahmanirvāṇamṛcchati  | |2-72 | |",
+                meaning: "ஓ பார்த்தா, ஒரு ஞானம் பெற்ற ஆத்மாவின் நிலையை அடைந்து பிறகு, ஒருவன் மீண்டும் ஒருபோதும் ஏமாற்றப்படுவதில்லை. மரண நேரத்திலும் இந்த உணர்வில் நிலைநிறுத்தப்பட்டு, ஒருவர் பிறப்பு மற்றும் இறப்பு சுழற்சியில் இருந்து விடுபட்டு, கடவுளின் உன்னதமான இருப்பிடத்தை அடைகிறார்.",
+                categories: ["comp1_taruna"]
             },
             {
                 chapter: 3, verse: 12,
                 ref: "அத்தியாயம் 3, ஶ்லோகம் 12 (கர்ம யோகம்)",
                 title: "Ishtan Bhogan Hi Vo Deva",
-                sanskrit: "इष्टान्भोगान् हि वो देवा दास्यन्ते यज्ञभाविताः ।\nतैर्दत्तानप्रदायैभ्यो यो भुङ्क्ते स्तेन एव सः ॥",
-                trans: "iṣṭānbhōgān hi vō dēvā dāsyantē yajñabhāvitāḥ .\ntairdattānapradāyaibhyō yō bhuṅktē stēna ēva saḥ ||",
-                meaning: "யாகங்களினால் திருப்தியுறும் தேவர்கள் உங்களின் வாழ்விற்குத் தேவையான போகங்களை வழங்குவார்கள். ஆனால் அவர்களால் வழங்கப்பட்ட பொருட்களை அவர்களுக்குத் திரும்ப அர்ப்பணிக்காமல் (நன்றி உணர்வின்றி) அனுபவிப்பவன் திருடனே ஆவான்."
+                sanskrit: "इष्टान्भोगान् हि वो देवा दास्यन्ते यज्ञभाविताः ।
+तैर्दत्तानप्रदायैभ्यो यो भुङ्क्ते स्तेन एव सः ॥",
+                trans: "iṣṭānbhōgān hi vō dēvā dāsyantē yajñabhāvitāḥ .
+tairdattānapradāyaibhyō yō bhuṅktē stēna ēva saḥ ||",
+                meaning: "யாகங்களினால் திருப்தியுறும் தேவர்கள் உங்களின் வாழ்விற்குத் தேவையான போகங்களை வழங்குவார்கள். ஆனால் அவர்களால் வழங்கப்பட்ட பொருட்களை அவர்களுக்குத் திரும்ப அர்ப்பணிக்காமல் (நன்றி உணர்வின்றி) அனுபவிப்பவன் திருடனே ஆவான்.",
+                categories: ["comp3"]
             },
             {
                 chapter: 4, verse: 24,
                 ref: "அத்தியாயம் 4, ஶ்லோகம் 24 (ஞானகர்மஸந்நியாஸ யோகம்)",
                 title: "Brahmarpanam Brahma Havir",
-                sanskrit: "ब्रह्मार्पणं ब्रह्म हविर्ब्रह्माग्नौ ब्रह्मणा हुतम् ।\nब्रह्मैव तेन गन्तव्यं ब्रह्मकर्मसमाधिना ॥",
-                trans: "brahmārpaṇaṁ brahma havir brahmāgnau brahmaṇā hutam .\nbrahmaiva tēna gantavyaṁ brahmakarmasamādhinā ||",
-                meaning: "அர்ப்பணிக்கும் கரண்டி பிரம்மம்; அர்ப்பணிக்கப்படும் நெய் பிரம்மம்; பிரம்மமாகிய வேள்வி நெருப்பில் பிரம்மமாகிய அர்ப்பணிப்பவனால் இது செய்யப்படுகிறது. பிரம்ம செயலில் முழுமையாக நிலைபெற்ற அவனால் அடையப்படும் இலக்கும் பிரம்மமே."
+                sanskrit: "ब्रह्मार्पणं ब्रह्म हविर्ब्रह्माग्नौ ब्रह्मणा हुतम् ।
+ब्रह्मैव तेन गन्तव्यं ब्रह्मकर्मसमाधिना ॥",
+                trans: "brahmārpaṇaṁ brahma havir brahmāgnau brahmaṇā hutam .
+brahmaiva tēna gantavyaṁ brahmakarmasamādhinā ||",
+                meaning: "அர்ப்பணிக்கும் கரண்டி பிரம்மம்; அர்ப்பணிக்கப்படும் நெய் பிரம்மம்; பிரம்மமாகிய வேள்வி நெருப்பில் பிரம்மமாகிய அர்ப்பணிப்பவனால் இது செய்யப்படுகிறது. பிரம்ம செயலில் முழுமையாக நிலைபெற்ற அவனால் அடையப்படும் இலக்கும் பிரம்மமே.",
+                categories: ["comp3"]
             },
             {
                 chapter: 5, verse: 18,
                 ref: "அத்தியாயம் 5, ஶ்லோகம் 18 (கர்மஸந்நியாஸ யோகம்)",
                 title: "Vidya Vinaya Sampanne",
-                sanskrit: "विद्याविनयसम्पन्ने ब्राह्मणे गवि हस्तिनि ।\nशुनि चैव श्वपाके च पण्डिताः समदर्शिनः ॥",
-                trans: "vidyāvinayasampannē brāhmaṇē gavi hastini .\nśuni caiva śvapākē ca paṇḍitāḥ samadarśinaḥ ||",
-                meaning: "உண்மையான ஞானிகள், கல்வியும் பணிவும் உடைய பிராமணனிடத்தும், பசு, யானை, நாய் மற்றும் நாய்க்கறி உண்பவனிடத்தும் (சண்டாளன்) ஆன்மத் தன்மையில் பேதமின்றி சம நோக்குடன் விளங்குவார்கள்."
+                sanskrit: "विद्याविनयसम्पन्ने ब्राह्मणे गवि हस्तिनि ।
+शुनि चैव श्वपाके च पण्डिताः समदर्शिनः ॥",
+                trans: "vidyāvinayasampannē brāhmaṇē gavi hastini .
+śuni caiva śvapākē ca paṇḍitāḥ samadarśinaḥ ||",
+                meaning: "உண்மையான ஞானிகள், கல்வியும் பணிவும் உடைய பிராமணனிடத்தும், பசு, யானை, நாய் மற்றும் நாய்க்கறி உண்பவனிடத்தும் (சண்டாளன்) ஆன்மத் தன்மையில் பேதமின்றி சம நோக்குடன் விளங்குவார்கள்.",
+                categories: ["comp3"]
             },
             {
                 chapter: 6, verse: 5,
                 ref: "அத்தியாயம் 6, ஶ்லோகம் 5 (ஆத்மஸம்யம யோகம்)",
                 title: "Uddhared Atmanatmanam",
-                sanskrit: "उद्धरेदात्मनात्मानं नात्मानमवसादयेत् ।\nआत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः ॥",
-                trans: "uddharēdātmanātmānaṁ nātmānamavasādayet .\nātmaiva hyātmanō bandhurātmaiva ripurātmanaḥ ||",
-                meaning: "மனிதன் தன் மனதின் உதவியால் தன்னைத் தானே உயர்த்திக் கொள்ள வேண்டும், தன்னைத் தாழ்த்திக் கொள்ளக் கூடாது. ஏனெனில், மனிதனின் மனமே அவனுக்கு உற்ற நண்பனாகவும், மனமே அவனுக்குப் பெரும் பகைவனாகவும் மாறக் கூடியது."
+                sanskrit: "उद्धरेदात्मनात्मानं नात्मानमवसादयेत् ।
+आत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः ॥",
+                trans: "uddharēdātmanātmānaṁ nātmānamavasādayet .
+ātmaiva hyātmanō bandhurātmaiva ripurātmanaḥ ||",
+                meaning: "மனிதன் தன் மனதின் உதவியால் தன்னைத் தானே உயர்த்திக் கொள்ள வேண்டும், தன்னைத் தாழ்த்திக் கொள்ளக் கூடாது. ஏனெனில், மனிதனின் மனமே அவனுக்கு உற்ற நண்பனாகவும், மனமே அவனுக்குப் பெரும் பகைவனாகவும் மாறக் கூடியது.",
+                categories: ["comp3", "comp1_bala"]
             },
             {
                 chapter: 7, verse: 7,
                 ref: "அத்தியாயம் 7, ஶ்லோகம் 7 (ஞானவிஞ்ஞான யோகம்)",
                 title: "Mattah Parataram Nanyat",
-                sanskrit: "मत्तः परतरं नान्यत्किञ्चिदस्ति धनञ्जय ।\nमयि सर्वमिदं प्रोतं सूत्रे मणिगणा इव ॥",
-                trans: "mattaḥ parataraṁ nānyatkiñcidasti dhanañjaya .\nmayi sarvamidaṁ prōtaṁ sūtrē maṇigaṇā iva ||",
-                meaning: "அர்ஜுனா! என்னை விட மேலான காரணம் வேறு எதுவும் இவ்வுலகில் இல்லை. நூலில் கோர்க்கப்பட்ட முத்துக்களைப் போல, பிரபஞ்சம் முழுவதும் என்னிடமே கோர்க்கப்பட்டு என்னையே சார்ந்துள்ளது."
+                sanskrit: "मत्तः परतरं नान्यत्किञ्चिदस्ति धनञ्जय ।
+मयि सर्वमिदं प्रोतं सूत्रे मणिगणा इव ॥",
+                trans: "mattaḥ parataraṁ nānyatkiñcidasti dhanañjaya .
+mayi sarvamidaṁ prōtaṁ sūtrē maṇigaṇā iva ||",
+                meaning: "அர்ஜுனா! என்னை விட மேலான காரணம் வேறு எதுவும் இவ்வுலகில் இல்லை. நூலில் கோர்க்கப்பட்ட முத்துக்களைப் போல, பிரபஞ்சம் முழுவதும் என்னிடமே கோர்க்கப்பட்டு என்னையே சார்ந்துள்ளது.",
+                categories: ["comp3"]
             },
             {
                 chapter: 8, verse: 13,
                 ref: "அத்தியாயம் 8, ஶ்லோகம் 13 (அக்ஷரபரப்ரஹ்ம யோகம்)",
                 title: "Om Ityekaksharam Brahma",
-                sanskrit: "ओमित्येकाक्षरं ब्रह्म व्याहरन्मामनुस्मरन् ।\nयः प्रयाति त्यजन्देहं स याति परमां गतिम् ॥",
-                trans: "ōmityēkākṣaraṁ brahma vyāharanmāmanusmaran .\nyaḥ prayāti tyajandēhaṁ sa yāti paramāṁ gatim ||",
-                meaning: "பரப்பிரம்மத்தைக் குறிக்கும் 'ஓம்' என்ற ஓரெழுத்து மந்திரத்தை உச்சரித்துக் கொண்டும், என் ஆன்ம சொரூபத்தை தியானித்துக் கொண்டும் எவன் தன் உடலைத் துறந்து செல்கிறானோ, அவன் உன்னதமான முக்தி நிலையை அடைகிறான்."
+                sanskrit: "ओमित्येकाक्षरं ब्रह्म व्याहरन्मामनुस्मरन् ।
+यः प्रयाति त्यजन्देहं स याति परमां गतिम् ॥",
+                trans: "ōmityēkākṣaraṁ brahma vyāharanmāmanusmaran .
+yaḥ prayāti tyajandēhaṁ sa yāti paramāṁ gatim ||",
+                meaning: "பரப்பிரம்மத்தைக் குறிக்கும் 'ஓம்' என்ற ஓரெழுத்து மந்திரத்தை உச்சரித்துக் கொண்டும், என் ஆன்ம சொரூபத்தை தியானித்துக் கொண்டும் எவன் தன் உடலைத் துறந்து செல்கிறானோ, அவன் உன்னதமான முக்தி நிலையை அடைகிறான்.",
+                categories: ["comp3"]
             },
             {
                 chapter: 9, verse: 12,
                 ref: "அத்தியாயம் 9, ஶ்லோகம் 12 (ராஜவித்யா ராஜகுஹ்ய யோகம்)",
                 title: "Moghasha Mogha Karmano",
-                sanskrit: "मोघाशा मोघकर्माणो मोघज्ञाना विचेतसः ।\nराक्षसीमासुरीं चैव प्रकृतिं मोहिनीं श्रिताः ॥",
-                trans: "mōghāśā mōghakarmāṇō mōghajñānā vicētasaḥ .\nrākṣasīmāsurīṁ caiva prakṛtiṁ mōhinīṁ śritāḥ ||",
-                meaning: "விவேகமற்றவர்கள், வீணான ஆசைகளையும், வீணான செயல்களையும், வீணான அறிவையும் உடையவர்கள் ஆகி, மயக்கத்தை உண்டாக்கும் அரக்க (ராக்ஷஸ) மற்றும் அசுர குணங்களிலேயே மூழ்கிக் கிடக்கின்றனர்."
+                sanskrit: "मोघाशा मोघकर्माणो मोघज्ञाना विचेतसः ।
+राक्षसीमासुरीं चैव प्रकृतिं मोहिनीं श्रिताः ॥",
+                trans: "mōghāśā mōghakarmāṇō mōghajñānā vicētasaḥ .
+rākṣasīmāsurīṁ caiva prakṛtiṁ mōhinīṁ śritāḥ ||",
+                meaning: "விவேகமற்றவர்கள், வீணான ஆசைகளையும், வீணான செயல்களையும், வீணான அறிவையும் உடையவர்கள் ஆகி, மயக்கத்தை உண்டாக்கும் அரக்க (ராக்ஷஸ) மற்றும் அசுர குணங்களிலேயே மூழ்கிக் கிடக்கின்றனர்.",
+                categories: ["comp3"]
+            },
+            {
+                chapter: 9, verse: 22,
+                ref: "அத்தியாயம் 9, ஶ்லோகம் 22 (ராஜவித்யா ராஜகுஹ்ய யோகம்)",
+                title: "Ananyāścintayanto Māṃ Ye",
+                sanskrit: "अनन्याश्चिन्तयन्तो मां ये जनाः पर्युपासते |
+तेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम् ||९-२२||",
+                trans: "ananyāścintayanto māṃ ye janāḥ paryupāsate  .
+teṣāṃ nityābhiyuktānāṃ yogakṣemaṃ vahāmyaham  | |9-22 | |",
+                meaning: "எப்பொழுதும்  மனதை என்னிடம் நிலைநிருத்தி, என்னிடம் பிரத்யேக பக்தியில் ஈடுபடுபவர்கள் இருக்கிறார்கள். எவருடைய மனம் எப்பொழுதும் என்னில் லயிக்கப்படுகிறதோ, அவர்களுக்கு, அவர்களிடம் இல்லாததைக் கொடுத்து,  ஏற்கனவே அவர்கள் உடைமையாக   பெற்றிருப்பதை  பாதுகாக்கிறேன்.",
+                categories: ["comp1_bala"]
+            },
+            {
+                chapter: 9, verse: 27,
+                ref: "அத்தியாயம் 9, ஶ்லோகம் 27 (ராஜவித்யா ராஜகுஹ்ய யோகம்)",
+                title: "Yatkaroṣi Yadaśnāsi Yajjuhoṣi",
+                sanskrit: "यत्करोषि यदश्नासि यज्जुहोषि ददासि यत् |
+यत्तपस्यसि कौन्तेय तत्कुरुष्व मदर्पणम् ||९-२७||",
+                trans: "yatkaroṣi yadaśnāsi yajjuhoṣi dadāsi yat  .
+yattapasyasi kaunteya tatkuruṣva madarpaṇam  | |9-27 | |",
+                meaning: "குந்தியின் மகனே, நீ எதைச் செய்தாலும், எதைச் சப்பிட்டாலும், புனிதமான நெருப்புக்குப் எதைக்காணிக்கையாக் கொடுத்தாலும் , எதைப் பரிசாகக் கொடுத்தாலும், என்ன துறவறம் செய்கிறாயோ, அவற்றை எனக்கு காணிக்கையாகச் செய்.",
+                categories: ["comp1_bala"]
             },
             {
                 chapter: 10, verse: 41,
                 ref: "அத்தியாயம் 10, ஶ்லோகம் 41 (விபூதி யோகம்)",
                 title: "Yad Yad Vibhutimat Sattvam",
-                sanskrit: "यद्यद्विभूतिमत्सत्त्वं श्रीमदूर्जितमेव वा ।\nतत्तदेवावगच्छ त्वं मम तेजोंऽशसम्भवम् ॥",
-                trans: "yadyadvibhūtimatsattvaṁ śrīmadūrjitamēva va .\ntattadēvāvagaccha tvaṁ mama tējō'ṁśasambhavam ||",
-                meaning: "ஒளியும், அழகும், வலிமையும், செல்வமும் கொண்டு சிறந்து விளங்கும் அனைத்துப் பொருட்களும் எனது தெய்வீக ஒளியின் ஒரு சிறு துளியிலிருந்து தோன்றியவை என்பதை நீ அறிவாயாக."
+                sanskrit: "यद्यद्विभूतिमत्सत्त्वं श्रीमदूर्जितमेव वा ।
+तत्तदेवावगच्छ त्वं मम तेजोंऽशसम्भवम् ॥",
+                trans: "yadyadvibhūtimatsattvaṁ śrīmadūrjitamēva va .
+tattadēvāvagaccha tvaṁ mama tējō'ṁśasambhavam ||",
+                meaning: "ஒளியும், அழகும், வலிமையும், செல்வமும் கொண்டு சிறந்து விளங்கும் அனைத்துப் பொருட்களும் எனது தெய்வீக ஒளியின் ஒரு சிறு துளியிலிருந்து தோன்றியவை என்பதை நீ அறிவாயாக.",
+                categories: ["comp3"]
             },
             {
                 chapter: 11, verse: 55,
                 ref: "அத்தியாயம் 11, ஶ்லோகம் 55 (விஸ்வரூபதர்ஸன யோகம்)",
                 title: "Matkarmakrinmatparamo",
-                sanskrit: "मत्कर्मकृन्मत्परमो मद्भक्तः सङ्गवर्जितः ।\nनिर्वैरः सर्वभूतेषु यः स मामेति पाण्डव ॥",
-                trans: "matkarmakṛnmatparamō madbhaktaḥ saṅgavarjitaḥ .\nnirvairaḥ sarvabhūtēṣu yaḥ sa māmēti pāṇḍava ||",
-                meaning: "பாண்டவா! எனக்காகவே கடமைகளைச் செய்பவனும், என்னையே உன்னத லட்சியமாகக் கொண்டவனும், எனது பக்தனும், பற்றுதல்கள் அற்றவனும், எந்த ஒரு உயிரிடத்தும் பகையற்றவனுமாய் விளங்குபவன் எவனோ, அவனே என்னை அடைகிறான்."
+                sanskrit: "मत्कर्मकृन्मत्परमो मद्भक्तः सङ्गवर्जितः ।
+निर्वैरः सर्वभूतेषु यः स मामेति पाण्डव ॥",
+                trans: "matkarmakṛnmatparamō madbhaktaḥ saṅgavarjitaḥ .
+nirvairaḥ sarvabhūtēṣu yaḥ sa māmēti pāṇḍava ||",
+                meaning: "பாண்டவா! எனக்காகவே கடமைகளைச் செய்பவனும், என்னையே உன்னத லட்சியமாகக் கொண்டவனும், எனது பக்தனும், பற்றுதல்கள் அற்றவனும், எந்த ஒரு உயிரிடத்தும் பகையற்றவனுமாய் விளங்குபவன் எவனோ, அவனே என்னை அடைகிறான்.",
+                categories: ["comp3"]
             },
             {
                 chapter: 12, verse: 13,
                 ref: "அத்தியாயம் 12, ஶ்லோகம் 13 (பக்தி யோகம்)",
                 title: "Adveshta Sarvabhutanam",
-                sanskrit: "अद्वेष्टा सर्वभातानां मैत्रः करुण एव च ।\nनिर्ममो निरहङ्कारः समदुःखसुखः क्षमी ॥",
-                trans: "advēṣṭā sarvabhūtānāṁ maitraḥ karuṇa eva ca .\nnirmamō nirahaṅkāraḥ samaduḥkhasukhaḥ kṣamī ||",
-                meaning: "எந்த உயிரினத்தையும் வெறுக்காதவனும், அனைவரிடமும் நட்பும் கருணையும் கொண்டவனும், 'எனது' என்ற மமதையும் அகந்தையும் அற்றவனும், இன்ப துன்பங்களைச் சமமாக ஏற்பவனும், பொறுமை உடையவனுமான பக்தன் எனக்குப் பிரியமானவன்."
+                sanskrit: "अद्वेष्टा सर्वभातानां मैत्रः करुण एव च ।
+निर्ममो निरहङ्कारः समदुःखसुखः क्षमी ॥",
+                trans: "advēṣṭā sarvabhūtānāṁ maitraḥ karuṇa eva ca .
+nirmamō nirahaṅkāraḥ samaduḥkhasukhaḥ kṣamī ||",
+                meaning: "எந்த உயிரினத்தையும் வெறுக்காதவனும், அனைவரிடமும் நட்பும் கருணையும் கொண்டவனும், 'எனது' என்ற மமதையும் அகந்தையும் அற்றவனும், இன்ப துன்பங்களைச் சமமாக ஏற்பவனும், பொறுமை உடையவனுமான பக்தன் எனக்குப் பிரியமானவன்.",
+                categories: ["comp3"]
             },
             {
                 chapter: 13, verse: 27,
                 ref: "அத்தியாயம் 13, ஶ்லோகம் 27 (க்ஷேத்ரக்ஷேத்ரக்ஞவிபாக யோகம்)",
                 title: "Samam Sarveshu Bhuteshu",
-                sanskrit: "समं सर्वेषु भूतेषु तिष्ठन्तं परमेश्वरम् ।\nविनश्यत्स्वविनश्यन्तं यः पश्यति स पश्यति ॥",
-                trans: "samaṁ sarvēṣu bhūtēṣu tiṣṭhantaṁ paramēśvaram .\nvinaśyatsvavinaśyantaṁ yaḥ paśyati sa paśyati ||",
-                meaning: "அழியக் கூடிய எல்லா உடல்களிலும் அழியாத பரமேஸ்வரன் சமமாக வீற்றிருப்பதை எவன் காண்கிறானோ, அவனே உண்மையான காட்சியைக் கண்டவன் ஆவான் (அவனே ஞானி)."
+                sanskrit: "समं सर्वेषु भूतेषु तिष्ठन्तं परमेश्वरम् ।
+विनश्यत्स्वविनश्यन्तं यः पश्यति स पश्यति ॥",
+                trans: "samaṁ sarvēṣu bhūtēṣu tiṣṭhantaṁ paramēśvaram .
+vinaśyatsvavinaśyantaṁ yaḥ paśyati sa paśyati ||",
+                meaning: "அழியக் கூடிய எல்லா உடல்களிலும் அழியாத பரமேஸ்வரன் சமமாக வீற்றிருப்பதை எவன் காண்கிறானோ, அவனே உண்மையான காட்சியைக் கண்டவன் ஆவான் (அவனே ஞானி).",
+                categories: ["comp3"]
             },
             {
                 chapter: 14, verse: 24,
                 ref: "அத்தியாயம் 14, ஶ்லோகம் 24 (குணத்ரயவிபாக யோகம்)",
                 title: "Samaduhkhasukhah Svasthah",
-                sanskrit: "समदुःखसुखः स्वस्थः समलोष्टाश्मकाञ्चनः ।\nतुल्यप्रियाप्रियो धीरस्तुल्यनिन्दात्मसंस्तुतिः ॥",
-                trans: "samaduḥkhasukhaḥ svasthaḥ samalōṣṭāśmakāñcanaḥ .\ntulyapriyāpriyō dhīrastulyanindātmasaṁstutiḥ ||",
-                meaning: "இன்ப துன்பங்களை சமமாக மதிப்பவனும், தன் ஆத்மாவில் நிலைபெற்றவனும், மண், கல், தங்கம் இவற்றை சமமாக நோக்குபவனும், விருப்பு வெறுப்புகளைக் கடந்தவனும், நிந்தனையையும் புகழையும் சமமாக ஏற்கும் மனவலிமை உடைய தீரனுமே குணங்களைக் கடந்தவன் ஆவான்."
+                sanskrit: "समदुःखसुखः स्वस्थः समलोष्टाश्मकाञ्चनः ।
+तुल्यप्रियाप्रियो धीरस्तुल्यनिन्दात्मसंस्तुतिः ॥",
+                trans: "samaduḥkhasukhaḥ svasthaḥ samalōṣṭāśmakāñcanaḥ .
+tulyapriyāpriyō dhīrastulyanindātmasaṁstutiḥ ||",
+                meaning: "இன்ப துன்பங்களை சமமாக மதிப்பவனும், தன் ஆத்மாவில் நிலைபெற்றவனும், மண், கல், தங்கம் இவற்றை சமமாக நோக்குபவனும், விருப்பு வெறுப்புகளைக் கடந்தவனும், நிந்தனையையும் புகழையும் சமமாக ஏற்கும் மனவலிமை உடைய தீரனுமே குணங்களைக் கடந்தவன் ஆவான்.",
+                categories: ["comp3"]
             },
             {
                 chapter: 15, verse: 14,
                 ref: "அத்தியாயம் 15, ஶ்லோகம் 14 (புருஷோத்தம யோகம்)",
                 title: "Aham Vaishvanaro Bhutva",
-                sanskrit: "अहं वैश्वानरो भूत्वा प्राणिनां देहमाश्रितः ।\nप्राणापानसमायुक्तः पचाम्यन्नं चतुर्विधम् ॥",
-                trans: "ahaṁ vaiśvānarō bhūtvā prāṇināṁ dēhamāśritaḥ .\nprāṇāpānasamāyuktaḥ pacāmyannaṁ caturvidham ||",
-                meaning: "நான் ஜடராக்னி (உடல் சூடு/பசி நெருப்பு) என்ற வடிவில் உயிரினங்களின் உடலில் குடியேறி, பிராண மற்றும் அபாண வாயுக்களுடன் இணைந்து, நான்கு வகையான உணவுகளையும் செரிக்க வைக்கிறேன்."
+                sanskrit: "अहं वैश्वानरो भूत्वा प्राणिनां देहमाश्रितः ।
+प्राणापानसमायुक्तः पचाम्यन्नं चतुर्विधम् ॥",
+                trans: "ahaṁ vaiśvānarō bhūtvā prāṇināṁ dēhamāśritaḥ .
+prāṇāpānasamāyuktaḥ pacāmyannaṁ caturvidham ||",
+                meaning: "நான் ஜடராக்னி (உடல் சூடு/பசி நெருப்பு) என்ற வடிவில் உயிரினங்களின் உடலில் குடியேறி, பிராண மற்றும் அபாண வாயுக்களுடன் இணைந்து, நான்கு வகையான உணவுகளையும் செரிக்க வைக்கிறேன்.",
+                categories: ["comp3"]
             },
             {
                 chapter: 16, verse: 21,
                 ref: "அத்தியாயம் 16, ஶ்லோகம் 21 (தைவாஸுரஸம்பத்விபாக யோகம்)",
                 title: "Trividham Narakasyedam",
-                sanskrit: "त्रिविधं नरकस्येदं द्वारं नाशनमात्मनः ।\nकामः क्रोधस्तथा लोभस्तस्मादेतत्त्रयं त्यजेत् ॥",
-                trans: "trividhaṁ narakasyēdaṁ dvāraṁ nāśanamātmanaḥ .\nkāmaḥ krōdhatathā lōbhastasmādētat trayaṁ tyajēt ||",
-                meaning: "காமம், குரோதம் (கோபம்), லோபம் (பேராசை) ஆகிய மூன்றும் ஆத்மாவை நரகத்தில் தள்ளி அழிவுக்கு இட்டுச் செல்லும் வாசல்களாகும். எனவே ஒருவன் தன் சுய முன்னேற்றத்திற்காக இந்த மூன்றையும் அடியோடு தியாகம் செய்ய வேண்டும்."
+                sanskrit: "त्रिविधं नरकस्येदं द्वारं नाशनमात्मनः ।
+कामः क्रोधस्तथा लोभस्तस्मादेतत्त्रयं त्यजेत् ॥",
+                trans: "trividhaṁ narakasyēdaṁ dvāraṁ nāśanamātmanaḥ .
+kāmaḥ krōdhatathā lōbhastasmādētat trayaṁ tyajēt ||",
+                meaning: "காமம், குரோதம் (கோபம்), லோபம் (பேராசை) ஆகிய மூன்றும் ஆத்மாவை நரகத்தில் தள்ளி அழிவுக்கு இட்டுச் செல்லும் வாசல்களாகும். எனவே ஒருவன் தன் சுய முன்னேற்றத்திற்காக இந்த மூன்றையும் அடியோடு தியாகம் செய்ய வேண்டும்.",
+                categories: ["comp3"]
             },
             {
                 chapter: 17, verse: 16,
                 ref: "அத்தியாயம் 17, ஶ்லோகம் 16 (ஸ்ரத்தாதரயவிபாக யோகம்)",
                 title: "Manahprasadah Saumyatvam",
-                sanskrit: "मनःप्रसादः सौम्यत्वं मौनमात्मविनिग्रहः ।\nभावसंशुद्धिरित्येतत्तपो मानसमुच्यते ॥",
-                trans: "manaḥprasādaḥ saumyatvaṁ maunamātmavinigrahaḥ .\nbhāvasaṁśuddhirityētattapō mānasamucyate ||",
-                meaning: "மனத்தூய்மை, சாந்த குணம், மௌனம் (தேவையற்ற பேச்சுகளைத் தவிர்த்தல்), தற்போக்கைக் கட்டுப்படுத்துதல் மற்றும் எண்ணங்களின் தூய்மை ஆகிய இவை மனத்தினால் செய்யப்படும் தவம் (மனத்தவம்) என்று கூறப்படுகிறது."
+                sanskrit: "मनःप्रसादः सौम्यत्वं मौनमात्मविनिग्रहः ।
+भावसंशुद्धिरित्येतत्तपो मानसमुच्यते ॥",
+                trans: "manaḥprasādaḥ saumyatvaṁ maunamātmavinigrahaḥ .
+bhāvasaṁśuddhirityētattapō mānasamucyate ||",
+                meaning: "மனத்தூய்மை, சாந்த குணம், மௌனம் (தேவையற்ற பேச்சுகளைத் தவிர்த்தல்), தற்போக்கைக் கட்டுப்படுத்துதல் மற்றும் எண்ணங்களின் தூய்மை ஆகிய இவை மனத்தினால் செய்யப்படும் தவம் (மனத்தவம்) என்று கூறப்படுகிறது.",
+                categories: ["comp3"]
             },
             {
                 chapter: 18, verse: 66,
                 ref: "அத்தியாயம் 18, ஶ்லோகம் 66 (மோக்ஷஸந்நியாஸ யோகம்)",
                 title: "Sarvadharman Parityajya",
-                sanskrit: "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज ।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः ॥",
-                trans: "sarvadharmānparityajya māmēkaṁ śaraṇaṁ vraja .\nahaṁ tvāṁ sarvapāpēbhyō mōkṣayiṣyāmi mā śucaḥ ||",
-                meaning: "அனைத்து தர்மங்களையும் (கடமைப் பற்றுதல்களை) துறந்து, என்னை மட்டுமே சரணடைவாயாக. நான் உன்னை உனது எல்லாப் பாவங்களிலிருந்தும் விடுவிப்பேன். நீ சிறிதும் துயரப்படாதே."
+                sanskrit: "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज ।
+अहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः ॥",
+                trans: "sarvadharmānparityajya māmēkaṁ śaraṇaṁ vraja .
+ahaṁ tvāṁ sarvapāpēbhyō mōkṣayiṣyāmi mā śucaḥ ||",
+                meaning: "அனைத்து தர்மங்களையும் (கடமைப் பற்றுதல்களை) துறந்து, என்னை மட்டுமே சரணடைவாயாக. நான் உன்னை உனது எல்லாப் பாவங்களிலிருந்தும் விடுவிப்பேன். நீ சிறிதும் துயரப்படாதே.",
+                categories: ["comp3", "comp1_bala"]
             }
         ];
 
@@ -1453,15 +1783,23 @@
         const grid = document.getElementById('shlokasGrid');
         const searchInput = document.getElementById('shlokaSearch');
         const registerShlokaDropdown = document.getElementById('regShloka');
+        let currentShlokaCategory = 'comp3';
 
         function renderShlokas(filterText = '') {
             grid.innerHTML = '';
-            const filtered = shlokasData.filter(s => 
-                s.title.toLowerCase().includes(filterText.toLowerCase()) || 
-                s.ref.toLowerCase().includes(filterText.toLowerCase()) ||
-                s.sanskrit.includes(filterText) ||
-                s.meaning.includes(filterText)
-            );
+            
+            // Filter by category first
+            let filtered = shlokasData.filter(s => s.categories.includes(currentShlokaCategory));
+            
+            // Apply search filter if any
+            if (filterText) {
+                filtered = filtered.filter(s => 
+                    s.title.toLowerCase().includes(filterText.toLowerCase()) || 
+                    s.ref.toLowerCase().includes(filterText.toLowerCase()) ||
+                    s.sanskrit.includes(filterText) ||
+                    s.meaning.includes(filterText)
+                );
+            }
 
             if (filtered.length === 0) {
                 grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #64748b;" class="tamil-text">எந்த ஶ்லோகமும் கண்டறியப்படவில்லை!</div>`;
@@ -1480,8 +1818,33 @@
             });
         }
 
-        // Initialize Registration Dropdown Options
+        function switchShlokaTab(category) {
+            currentShlokaCategory = category;
+            
+            // Update active class on buttons
+            document.querySelectorAll('.shloka-tab').forEach(btn => btn.classList.remove('active'));
+            if (category === 'comp3') {
+                document.getElementById('tab-comp3').classList.add('active');
+                document.getElementById('shlokaSectionTitle').textContent = 'போட்டி 03: 18 முக்கிய ஶ்லோகங்கள்';
+                document.getElementById('shlokaSectionDesc').textContent = 'ஶ்லோக விளக்கப் போட்டிக்கு கீழே உள்ள 18 ஶ்லோகங்களில் ஒன்றை தேர்ந்தெடுக்க வேண்டும். அவற்றைப் படித்துத் தெரிந்து கொள்ள கார்டுகளை கிளிக் செய்யவும்.';
+            } else if (category === 'comp1_bala') {
+                document.getElementById('tab-comp1-bala').classList.add('active');
+                document.getElementById('shlokaSectionTitle').textContent = 'போட்டி 01: பால பிரிவு (15 வயதுக்கு கீழ்)';
+                document.getElementById('shlokaSectionDesc').textContent = 'சின்மய மிஷன் குறித்துள்ள 5 ஶ்லோகங்கள். அவற்றைப் படித்துத் தெரிந்து கொள்ள கார்டுகளை கிளிக் செய்யவும்.';
+            } else if (category === 'comp1_taruna') {
+                document.getElementById('tab-comp1-taruna').classList.add('active');
+                document.getElementById('shlokaSectionTitle').textContent = 'போட்டி 01: தருண பிரிவு (15 வயதுக்கு மேல்)';
+                document.getElementById('shlokaSectionDesc').textContent = 'அத்யாயம் 2, ஶ்லோகம் 54 முதல் 72 வரை (ஸ்திதப்ரஜ்ஞ தர்ஸனம்). அவற்றைப் படித்துத் தெரிந்து கொள்ள கார்டுகளை கிளிக் செய்யவும்.';
+            }
+            
+            // Reset search input
+            searchInput.value = '';
+            renderShlokas();
+        }
+
+        // Initialize Registration Dropdown Options (Fallback if element exists)
         function initShlokaDropdown() {
+            if (!registerShlokaDropdown) return;
             shlokasData.forEach(s => {
                 const opt = document.createElement('option');
                 opt.value = `அத் ${s.chapter} ~ ஶ்லோ ${s.verse} (${s.title})`;
