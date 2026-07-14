@@ -253,6 +253,52 @@
             background-color: #10b981; /* Success Green */
         }
 
+        /* Back to Form Styling */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-family: var(--font-tamil);
+            margin-bottom: 25px;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--secondary);
+        }
+
+        .btn-back-form {
+            background: linear-gradient(135deg, #10b981, #059669); /* Success Green */
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--font-tamil);
+            width: 100%;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-back-form:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+        }
+
+        .btn-back-form:active {
+            transform: translateY(0);
+        }
+
 
 
         /* Toast notification */
@@ -297,6 +343,8 @@
 <body>
 
     <div class="payment-card">
+        <a href="javascript:goBackToForm()" class="back-link">← படிவத்திற்கு திரும்பவும் (Back to Form)</a>
+        
         <div class="symbol">ॐ</div>
         <h1>கீதா ஜயந்தி 2026</h1>
         <div class="subtitle">போட்டி முன்பதிவு கட்டணம்</div>
@@ -350,7 +398,9 @@
             </div>
         </div>
 
-
+        <button onclick="goBackToForm()" class="btn-back-form">
+            ✅ படிவத்திற்கு திரும்பவும் (Return to Form)
+        </button>
     </div>
 
     <!-- Toast Notification -->
@@ -384,6 +434,15 @@
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 2500);
+        }
+
+        function goBackToForm() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                // Fallback to the Google Form if history is cleared
+                window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSeKowZRjBml3ZMNPh3c78zgfNshuJfNzInQ1cckobVvTxcn2g/viewform";
+            }
         }
     </script>
 </body>
