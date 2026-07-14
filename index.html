@@ -1863,9 +1863,22 @@ ahaṁ tvāṁ sarvapāpēbhyō mōkṣayiṣyāmi mā śucaḥ ||",
         const modalData = document.getElementById('modalData');
 
         function openShlokaModal(s) {
+            const chStr = s.chapter.toString().padStart(3, '0');
+            const vStr = s.verse.toString().padStart(3, '0');
+            const audioUrl = `https://www.holy-bhagavad-gita.org/media/audios/${chStr}_${vStr}.mp3`;
+
             modalData.innerHTML = `
                 <h3 class="shloka-detail-title">${s.title}</h3>
                 <p class="shloka-detail-ref tamil-text">${s.ref}</p>
+                
+                <div class="shloka-audio-container" style="margin: 20px 0; padding: 15px; background: rgba(217, 119, 6, 0.05); border-radius: 8px; text-align: center; border: 1px solid var(--border);">
+                    <div class="shloka-heading tamil-text" style="margin-bottom: 10px; font-weight: 600;">ஒலி வடிவம் (Chanting Audio):</div>
+                    <audio controls style="width: 100%; max-width: 400px;">
+                        <source src="${audioUrl}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+
                 <div class="shloka-heading tamil-text">சமஸ்கிருதம்:</div>
                 <pre class="shloka-sanskrit">${s.sanskrit}</pre>
                 <div class="shloka-heading tamil-text">ஒலிபெயர்ப்பு (Transliteration):</div>
@@ -1877,6 +1890,12 @@ ahaṁ tvāṁ sarvapāpēbhyō mōkṣayiṣyāmi mā śucaḥ ||",
         }
 
         function closeShlokaModal() {
+            // Stop any playing audio when modal is closed
+            const audioEl = modalData.querySelector('audio');
+            if (audioEl) {
+                audioEl.pause();
+                audioEl.currentTime = 0;
+            }
             modal.classList.remove('active');
         }
 
