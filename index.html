@@ -1851,14 +1851,16 @@
         function getLocalAudioUrl(chapter, verse) {
             const mapping = {
                 "1_1": "slokas/shloka 1 of adhyay 1.m4a.mp4",
-                "2_47": "slokas/shloka 47 chapter 2.m4a.mp4",
+                "2_47": "slokas/shloka 47 chapter 2.mp3",
                 "3_12": "slokas/Shloka 12 adhyay 3.m4a.mp4",
                 "4_24": "slokas/Shloka 24 adhyay 4.m4a.mp4",
                 "5_18": "slokas/Shloka 18 adhyay 5.m4a.mpeg",
-                "6_5": "slokas/Shloka 5 adhyay 6.m4a.mp4",
+                "6_5": "slokas/Shloka 5 adhyay 6.mp3",
                 "7_7": "slokas/Shloka 7 adhyay 7.m4a.mp4",
                 "8_13": "slokas/Shloka 13 adhyay 8.m4a.mp4",
                 "9_12": "slokas/Shloka 12 adhyay 9.m4a.mp4",
+                "9_22": "slokas/Shloka 22 adhyay 9.mp3",
+                "9_27": "slokas/Shloka 27 adhyay 9.mp3",
                 "10_41": "slokas/Shloka 41 adhyay 10.m4a.mp4",
                 "11_55": "slokas/Shloka 55 adhyay 11.m4a.mp4",
                 "12_13": "slokas/Shloka 13 adhyay 12.m4a.mp4",
@@ -1867,7 +1869,7 @@
                 "15_14": "slokas/Shloka 14 adhyay 15.m4a.mp4",
                 "16_21": "slokas/Shloka 21 adhyay 16.m4a.mp4",
                 "17_16": "slokas/Shloka 16 adhyay 17.m4a.mp4",
-                "18_66": "slokas/Shloka 66 adhyay 18.m4a.mp4"
+                "18_66": "slokas/Shloka 66 adhyay 18.mp3"
             };
             
             const key = `${chapter}_${verse}`;
@@ -1875,9 +1877,9 @@
                 return mapping[key];
             }
             
-            // Chapter 2 verses 54 to 72 are split from "Sholka 54 to 72 adyay 2.mp4"
+            // Chapter 2 verses 54 to 72 are loaded from the custom user uploads
             if (chapter === 2 && verse >= 54 && verse <= 72) {
-                return `slokas/Shloka ${verse} adhyay 2.mp4`;
+                return `slokas/Shloka ${verse} adhyay 2.mp3`;
             }
             
             return null;
