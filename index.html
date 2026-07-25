@@ -1855,7 +1855,21 @@
         const modal = document.getElementById('shlokaModal');
         const modalData = document.getElementById('modalData');
 
-        function getLocalAudioUrl(chapter, verse) {
+        function getLocalAudioUrl(chapter, verse, category = currentShlokaCategory) {
+            const key = `${chapter}_${verse}`;
+            
+            // Pragnya audio override specifically for Competition 01 (Bala Division)
+            if (category === 'comp1_bala') {
+                const pragnyaMapping = {
+                    "2_47": "slokas/shloka 47 chapter 2 - Pragnya.mp3",
+                    "6_5": "slokas/Shloka 5 adhyay 6 - pragnya.mp3",
+                    "18_66": "slokas/Shloka 66 adhyay 18 - Pragnya.mp3"
+                };
+                if (pragnyaMapping[key]) {
+                    return pragnyaMapping[key];
+                }
+            }
+
             const mapping = {
                 "1_1": "slokas/shloka 1 of adhyay 1.m4a.mp4",
                 "2_47": "slokas/shloka 47 chapter 2.m4a.mp4",
@@ -1879,7 +1893,6 @@
                 "18_66": "slokas/Shloka 66 adhyay 18.m4a.mp4"
             };
             
-            const key = `${chapter}_${verse}`;
             if (mapping[key]) {
                 return mapping[key];
             }
@@ -1896,7 +1909,7 @@
             const chStr = s.chapter.toString().padStart(3, '0');
             const vStr = s.verse.toString().padStart(3, '0');
             
-            const localUrl = getLocalAudioUrl(s.chapter, s.verse);
+            const localUrl = getLocalAudioUrl(s.chapter, s.verse, currentShlokaCategory);
             const audioUrl = localUrl || `https://www.holy-bhagavad-gita.org/media/audios/${chStr}_${vStr}.mp3`;
             const audioType = audioUrl.endsWith('.mpeg') ? 'audio/mpeg' : (audioUrl.endsWith('.mp3') ? 'audio/mpeg' : 'audio/mp4');
 
