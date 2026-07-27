@@ -1,5 +1,10 @@
-
 ffmpeg
 ffprobe
 *.wav
 *.Zone.Identifier
+node_modules/
+*.ttf
+generate_18_pdfs.js
+update_index_quiz.js
+test_output.pdf
+Quiz_Adhyaya_1_test.pdf
