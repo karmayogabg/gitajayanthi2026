@@ -1076,7 +1076,7 @@
             <div class="hero-badge-container">
                 <span class="hero-badge tamil-text">📅 டிசம்பர் 20, 2026</span>
                 <span class="hero-badge tamil-text">📍 சென்னையில் (இறுதிச் சுற்று)</span>
-                <span class="hero-badge tamil-text">🏆 3 பெரும் போட்டிகள்</span>
+                <span class="hero-badge tamil-text">🏆 4 பெரும் போட்டிகள்</span>
             </div>
 
             <!-- Countdown Timer -->
@@ -1132,7 +1132,7 @@
     <section class="section-padding container" id="competitions">
         <div class="section-title-wrapper">
             <h2 class="section-title tamil-text">போட்டி விவரங்கள்</h2>
-            <p class="section-desc tamil-text">கீதா ஜயந்தியை முன்னிட்டு மூன்று பிரிவுகளில் போட்டிகள் நடைபெறும். பங்கேற்று பரிசுகளை வெல்லுங்கள்!</p>
+            <p class="section-desc tamil-text">கீதா ஜயந்தியை முன்னிட்டு நான்கு பிரிவுகளில் போட்டிகள் நடைபெறும். பங்கேற்று பரிசுகளை வெல்லுங்கள்!</p>
         </div>
 
         <div class="competitions-grid">
@@ -1209,6 +1209,27 @@
                         <li>விளக்க உரை நிகழ்த்த <b>20 நிமிடங்கள்</b> வழங்கப்படும்.</li>
                         <li>உரைக்குப் பின் நடுவர்கள் கேட்கும் <b>3 கேள்விகளுக்கு</b> பதிலளிக்க வேண்டும்.</li>
                         <li><b>குறிப்புரை நூல் (Reference Book):</b> 18 அத்யாயங்களின் அனைத்து 700 ஶ்லோகங்களுக்கும் விளக்கம் அடங்கிய, <b>கீதாம்ருதானந்த் (Gitaamrutanand)</b> எழுதிய <b>"அம்ருத கலஶம் கீதை"</b> புத்தகத்தை குறிப்புரையாகப் பயன்படுத்தலாம்.<br><a href="அம்ருத கலஶம் கீதை.pdf" download style="color: var(--primary); font-weight: bold; text-decoration: underline; display: inline-block; margin-top: 5px;">📥 அம்ருத கலஶம் கீதை (PDF)</a></li>
+                    </ul>
+                </div>
+                <div class="comp-footer">
+                    <button class="btn btn-secondary tamil-text">விவரங்கள் & ஶ்லோகங்கள்</button>
+                </div>
+            </div>
+
+            <!-- Competition 4 -->
+            <div class="comp-card" id="card-pronunciation" onclick="selectComp('pronunciation')">
+                <span class="comp-badge tamil-text">போட்டி 04</span>
+                <div class="comp-header">
+                    <span class="comp-icon">🎙️</span>
+                    <h3 class="comp-title tamil-text">ஶ்லோக உச்சரிப்புப் போட்டி</h3>
+                    <p class="comp-fee tamil-text">கட்டணம்: <span class="comp-fee">₹11</span> / நபர்</p>
+                </div>
+                <div class="comp-body">
+                    <ul class="tamil-text">
+                        <li>வயது வரம்பு இல்லை. அனைவருக்கும் திறந்தது.</li>
+                        <li><b>பாடத்திட்டம்:</b> அத்யாயம் 5 (கர்மஸந்நியாஸ யோகம்) ~ ஶ்லோகங்கள் 8 மற்றும் 9 (Sloka 05.08 & 05.09).</li>
+                        <li>இவ்விரண்டு ஶ்லோகங்களையும் இணைத்து ஒரே கார்டில் கேட்கவும், மனனம் செய்து முறையான சமஸ்கிருத உச்சரிப்புடன் தெளிவாகப் படிக்கவும் வேண்டும்.</li>
+                        <li><b>ஒலி வடிவம் (Chanting Audio):</b> கீழே உள்ள பொத்தானைக் கிளிக் செய்து ஶ்லோக கார்டில் உள்ள இணைக்கப்பட்ட உச்சரிப்பு ஒலிவடிவத்தைக் கேட்டுப் பயிற்சி பெறலாம்.</li>
                     </ul>
                 </div>
                 <div class="comp-footer">
@@ -1505,6 +1526,7 @@
                 <button class="shloka-tab active" id="tab-comp3" onclick="switchShlokaTab('comp3')">போட்டி 03: 18 ஶ்லோகங்கள் (விளக்கம்)</button>
                 <button class="shloka-tab" id="tab-comp1-bala" onclick="switchShlokaTab('comp1_bala')">போட்டி 01: பால பிரிவு (மனப்பாடம்)</button>
                 <button class="shloka-tab" id="tab-comp1-taruna" onclick="switchShlokaTab('comp1_taruna')">போட்டி 01: தருண பிரிவு (மனப்பாடம்)</button>
+                <button class="shloka-tab" id="tab-comp4" onclick="switchShlokaTab('comp4')">போட்டி 04: உச்சரிப்பு (ஶ்லோ 5.8 & 5.9)</button>
             </div>
 
             <div class="search-container">
@@ -1897,6 +1919,16 @@
                 categories: ["comp3"]
             },
             {
+                chapter: 5, verse: "8-9",
+                ref: "அத்தியாயம் 5, ஶ்லோகம் 8 & 9 (கர்மஸந்நியாஸ யோகம்)",
+                title: "Naiva Kiñcit Karomīti / Pralapan Visṛjan Gṛhṇan",
+                sanskrit: "नैव किञ्चित्करोमीति युक्तो मन्येत तत्त्ववित् ।\nपश्यञ्शृण्वन्स्पृशञ्जिघ्रन्नश्नन्नगच्छन्स्वपञ्श्वसन् ॥ ८ ॥\n\nप्रलपन्विसृजन्गृह्णन्नुन्मिषन्निमिषन्नपि ।\nइन्द्रियाणीन्द्रियार्थेषु वर्तन्त इति धारयन् ॥ ९ ॥",
+                trans: "naiva kiñcitkarōmīti yuktō manyēta tattvavit .\npaśyañśṛṇvanspṛśañjighrannaśnannagacchansvapañśvasan || 8 ||\n\npralapanvisṛjaṅgṛhṇannunmiṣannimiṣannapi .\nindriyāṇīndriyārthēṣu vartanta iti dhārayan || 9 ||",
+                tamilSlok: "நைவ கிஞ்சித்கரோமீதி யுக்தோ மன்யேத தத்த்வவித் ।\nபஶ்யஞ்ச்ருண்வன்ஸ்ப்ருஶஞ்ஜிக்ரன்னஶ்னன்கச்சன்ஸ்வபன்ஶ்வசன் ॥ 8 ॥\n\nப்ரலபன்விஸ்ருஜன்க்ருஹ்ணன்னுன்மிஷன்நிமிஷன்னபி ।\nஇந்த்ரியாணீந்த்ரியார்தேஷு வர்தந்த இதி தாரயன் ॥ 9 ॥",
+                meaning: "மெய்யுணர்ந்த யோகி, தான் எதையும் செய்யவில்லை என்றே நினைப்பான்; காண்பது, கேட்பது, தொடுவது, நுகர்வது, உண்பது, நடப்பது, தூங்குவது, மூச்சு விடுவது, பேசுவது, உமிழ்வது, பிடிப்பது, கண்களைத் திறப்பது, மூடுவது என அனைத்துச் செயல்களின் போதும், புலன்களே தத்தமது விஷயங்களில் இயங்குகின்றன என்று உறுதியாகக் கொள்கிறான்.",
+                categories: ["comp4"]
+            },
+            {
                 chapter: 5, verse: 18,
                 ref: "அத்தியாயம் 5, ஶ்லோகம் 18 (கர்மஸந்நியாஸ யோகம்)",
                 title: "Vidya Vinaya Sampanne",
@@ -2144,6 +2176,9 @@
                 "2_47": "slokas/shloka 47 chapter 2.m4a.mp4",
                 "3_12": "slokas/Shloka 12 adhyay 3.m4a.mp4",
                 "4_24": "slokas/Shloka 24 adhyay 4.m4a.mp4",
+                "5_8-9": "slokas/05.08-09.ogg",
+                "5_8": "slokas/05.08-09.ogg",
+                "5_9": "slokas/05.08-09.ogg",
                 "5_18": "slokas/Shloka 18 adhyay 5.m4a.mpeg",
                 "6_5": "slokas/Shloka 5 adhyay 6.m4a.mp4",
                 "7_7": "slokas/Shloka 7 adhyay 7.m4a.mp4",
@@ -2180,7 +2215,7 @@
             
             const localUrl = getLocalAudioUrl(s.chapter, s.verse, currentShlokaCategory);
             const audioUrl = localUrl || `https://www.holy-bhagavad-gita.org/media/audios/${chStr}_${vStr}.mp3`;
-            const audioType = audioUrl.endsWith('.mpeg') ? 'audio/mpeg' : (audioUrl.endsWith('.mp3') ? 'audio/mpeg' : 'audio/mp4');
+            const audioType = audioUrl.endsWith('.ogg') ? 'audio/ogg' : (audioUrl.endsWith('.mpeg') ? 'audio/mpeg' : (audioUrl.endsWith('.mp3') ? 'audio/mpeg' : 'audio/mp4'));
 
             modalData.innerHTML = `
                 <h3 class="shloka-detail-title">${s.title}</h3>
@@ -2241,6 +2276,11 @@
                 document.getElementById('tab-comp1-taruna').classList.add('active');
                 document.getElementById('shlokaSectionTitle').textContent = 'போட்டி 01: தருண பிரிவு (15 வயதுக்கு மேல்)';
                 document.getElementById('shlokaSectionDesc').textContent = 'அத்யாயம் 2, ஶ்லோகம் 54 முதல் 72 வரை (ஸ்திதப்ரஜ்ஞ தர்ஸனம்). அவற்றைப் படித்துத் தெரிந்து கொள்ள கார்டுகளை கிளிக் செய்யவும்.';
+            } else if (category === 'comp4') {
+                const tab4 = document.getElementById('tab-comp4');
+                if (tab4) tab4.classList.add('active');
+                document.getElementById('shlokaSectionTitle').textContent = 'போட்டி 04: ஶ்லோக உச்சரிப்புப் போட்டி (அத்யாயம் 5 - ஶ்லோகங்கள் 8, 9)';
+                document.getElementById('shlokaSectionDesc').textContent = 'கீழே உள்ள ஶ்லோக கார்டைக் கிளிக் செய்து ஶ்லோகங்களைப் படிக்கவும், இணைக்கப்பட்ட உச்சரிப்பு ஒலிவடிவத்தைக் கேட்கவும் வசதி செய்யப்பட்டுள்ளது.';
             }
             
             searchInput.value = '';
@@ -2254,6 +2294,7 @@
             
             const shlokasSection = document.getElementById('shlokas');
             const quizSection = document.getElementById('quiz-download-section');
+            const tab4 = document.getElementById('tab-comp4');
             
             if (compType === 'recitation') {
                 document.getElementById('card-recitation').classList.add('active');
@@ -2266,6 +2307,7 @@
                 document.getElementById('tab-comp3').style.display = 'none';
                 document.getElementById('tab-comp1-bala').style.display = 'inline-block';
                 document.getElementById('tab-comp1-taruna').style.display = 'inline-block';
+                if (tab4) tab4.style.display = 'none';
                 
                 // Switch to Bala division by default
                 switchShlokaTab('comp1_bala');
@@ -2298,9 +2340,31 @@
                 document.getElementById('tab-comp3').style.display = 'inline-block';
                 document.getElementById('tab-comp1-bala').style.display = 'none';
                 document.getElementById('tab-comp1-taruna').style.display = 'none';
+                if (tab4) tab4.style.display = 'none';
                 
                 // Switch to Competition 3 shlokas by default
                 switchShlokaTab('comp3');
+                
+                // Smooth scroll to shlokas
+                if (scroll) {
+                    shlokasSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (compType === 'pronunciation') {
+                const cardPron = document.getElementById('card-pronunciation');
+                if (cardPron) cardPron.classList.add('active');
+                
+                // Show Shlokas section, hide Quiz download
+                shlokasSection.style.display = 'block';
+                quizSection.style.display = 'none';
+                
+                // Configure tabs for Competition 4
+                document.getElementById('tab-comp3').style.display = 'none';
+                document.getElementById('tab-comp1-bala').style.display = 'none';
+                document.getElementById('tab-comp1-taruna').style.display = 'none';
+                if (tab4) tab4.style.display = 'inline-block';
+                
+                // Switch to Competition 4 shlokas by default
+                switchShlokaTab('comp4');
                 
                 // Smooth scroll to shlokas
                 if (scroll) {
