@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aram - Excel Data Browser</title>
+    <meta name="description" content="A high-performance interactive data browser and filter for the Namma Saami Namma Kovil spreadsheet.">
+    
+    <!-- Google Fonts & Lucide Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- SheetJS CDN (Reads XLSX directly in browser) -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+    <style>
+        :root {
+            --bg-start: #0b0f19;
+            --bg-end: #060913;
+            --card-bg: rgba(17, 24, 39, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.25);
+            --font-sans: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(180deg, #ffffff 50%, #d1d5db 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .stat-badge {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-badge span {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* File Upload / Source Area */
+        .source-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .source-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .source-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .source-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .source-text p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .file-input-wrapper {
+            position: relative;
+        }
+
+        .btn-upload {
+            background: var(--accent);
+            color: white;
+            padding: 0.65rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-upload:hover {
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: translateY(-1px);
+        }
+
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        /* Loading Spinner */
+        .loader {
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Table & Controls View */
+        .table-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+            max-height: 65vh;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+            color: white;
+            font-weight: 600;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+        }
+
+        th.col-meaning {
+            min-width: 350px;
+        }
+
+        /* Filter Row Inputs */
+        .filter-row th {
+            top: 53px; /* Stacks below header row */
+            padding: 0.5rem 0.75rem 0.75rem 0.75rem;
+            background: rgba(17, 24, 39, 0.95);
+        }
+
+        .filter-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Table body rows */
+        tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            transition: background 0.2s ease;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        td {
+            padding: 0.9rem 1rem;
+            color: #d1d5db;
+            vertical-align: top;
+            line-height: 1.4;
+        }
+
+        td.meaning-cell {
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        /* Pagination & Footer Controls */
+        .table-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.01);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-page {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-page:hover:not(:disabled) {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .btn-page:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Glow effects */
+        .glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(50px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glow-1 { top: -100px; right: -100px; }
+        .glow-2 { bottom: -100px; left: -100px; }
+    </style>
+</head>
+<body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="container">
+        <header>
+            <h1><i data-lucide="database"></i> Namma Saami Namma Kovil - Data Browser</h1>
+            <div class="stats-bar">
+                <div class="stat-badge" id="badge-total">Total Rows: <span id="val-total">0</span></div>
+                <div class="stat-badge" id="badge-filtered">Filtered Matches: <span id="val-filtered">0</span></div>
+            </div>
+        </header>
+
+        <!-- Source File Section -->
+        <div class="source-card">
+            <div class="source-info">
+                <div class="source-icon">
+                    <i data-lucide="file-spreadsheet" style="width: 24px; height: 24px;"></i>
+                </div>
+                <div class="source-text">
+                    <h3 id="source-file-title">நம்ம சாமி நம்ம கோவில் - data until 18-07-2026.xlsx</h3>
+                    <p id="source-file-status">Waiting to load data...</p>
+                </div>
+            </div>
+            
+            <div class="loader" id="file-loader">
+                <div class="spinner"></div>
+                <span id="loader-message">Parsing workbook...</span>
+            </div>
+
+            <div class="file-input-wrapper">
+                <button class="btn-upload"><i data-lucide="upload"></i> Upload Excel File</button>
+                <input type="file" class="file-input" id="excel-file-input" accept=".xlsx, .xls">
+            </div>
+        </div>
+
+        <!-- Table Display Area -->
+        <div class="table-card">
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr id="table-headers-row">
+                            <!-- Headers loaded dynamically -->
+                            <th>பெயர்</th>
+                            <th>தொடர்பு எண்</th>
+                            <th>மண்டலம்</th>
+                            <th>மாவட்டம்</th>
+                            <th>ஒன்றியம்</th>
+                            <th>பின்கோடு</th>
+                            <th class="col-meaning">பெயரின் விளக்கம்</th>
+                        </tr>
+                        <tr class="filter-row">
+                            <th><input type="text" class="filter-input" data-col="0" placeholder="Filter Name..."></th>
+                            <th><input type="text" class="filter-input" data-col="1" placeholder="Filter Contact..."></th>
+                            <th><input type="text" class="filter-input" data-col="2" placeholder="Filter Zone..."></th>
+                            <th><input type="text" class="filter-input" data-col="3" placeholder="Filter District..."></th>
+                            <th><input type="text" class="filter-input" data-col="4" placeholder="Filter Union..."></th>
+                            <th><input type="text" class="filter-input" data-col="5" placeholder="Filter Pincode..."></th>
+                            <th><input type="text" class="filter-input" data-col="6" placeholder="Filter Meaning..."></th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-secondary);">
+                                Please drag-and-drop or upload the Excel file to load the data grid.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Footer Pagination Controls -->
+            <div class="table-footer">
+                <span id="row-info-text">Showing rows 0-0 of 0</span>
+                <div class="pagination-controls">
+                    <button class="btn-page" id="btn-first" disabled><i data-lucide="chevrons-left" style="width: 16px; height: 16px;"></i> First</button>
+                    <button class="btn-page" id="btn-prev" disabled><i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i> Prev</button>
+                    <span id="page-num-indicator" style="margin: 0 0.5rem; font-weight: 600;">Page 1 of 1</span>
+                    <button class="btn-page" id="btn-next" disabled>Next <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i></button>
+                    <button class="btn-page" id="btn-last" disabled>Last <i data-lucide="chevrons-right" style="width: 16px; height: 16px;"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Application State
+        let allHeaders = ['பெயர்', 'தொடர்பு எண்', 'மண்டலம்', 'மாவட்டம்', 'ஒன்றியம்', 'பின்கோடு', 'பெயரின் விளக்கம்'];
+        let allRows = [];
+        let filteredRows = [];
+        let currentPage = 1;
+        const rowsPerPage = 50;
+        let columnFilters = ['', '', '', '', '', '', ''];
+
+        // Elements
+        const fileInput = document.getElementById('excel-file-input');
+        const fileLoader = document.getElementById('file-loader');
+        const loaderMessage = document.getElementById('loader-message');
+        const fileStatus = document.getElementById('source-file-status');
+        const tableBody = document.getElementById('table-body');
+        const valTotal = document.getElementById('val-total');
+        const valFiltered = document.getElementById('val-filtered');
+        const rowInfoText = document.getElementById('row-info-text');
+        const pageIndicator = document.getElementById('page-num-indicator');
+        
+        // Buttons
+        const btnFirst = document.getElementById('btn-first');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const btnLast = document.getElementById('btn-last');
+
+        // Initial setup
+        window.addEventListener('load', () => {
+            // Attempt to load default file if hosted locally under server
+            attemptAutoLoad();
+        });
+
+        // Auto-load if hosted on local server
+        async function attemptAutoLoad() {
+            const defaultFilename = 'நம்ம சாமி நம்ம கோவில் - data until 18-07-2026.xlsx';
+            try {
+                fileLoader.style.display = 'flex';
+                loaderMessage.textContent = 'Auto-fetching default excel sheet...';
+                
+                const response = await fetch(encodeURIComponent(defaultFilename));
+                if (!response.ok) throw new Error('Auto-fetch failed (not running on server or CORS blocked)');
+                
+                const arrayBuffer = await response.arrayBuffer();
+                parseExcel(arrayBuffer);
+            } catch (err) {
+                console.log(err.message);
+                fileLoader.style.display = 'none';
+                fileStatus.textContent = 'Please manually select the Excel file to load.';
+            }
+        }
+
+        // Upload triggered
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            document.getElementById('source-file-title').textContent = file.name;
+            fileLoader.style.display = 'flex';
+            loaderMessage.textContent = 'Reading file...';
+            
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                parseExcel(evt.target.result);
+            };
+            reader.readAsArrayBuffer(file);
+        });
+
+        // Parse array buffer via SheetJS
+        function parseExcel(arrayBuffer) {
+            loaderMessage.textContent = 'Parsing rows...';
+            setTimeout(() => {
+                try {
+                    const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' });
+                    const sheetName = workbook.SheetNames[0];
+                    const sheet = workbook.Sheets[sheetName];
+                    
+                    // Convert sheet data to JSON array of arrays
+                    const rawData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+                    
+                    if (rawData.length === 0) {
+                        throw new Error('Excel sheet is empty');
+                    }
+
+                    // Headers extraction
+                    allHeaders = rawData[0].map((h, index) => {
+                        let headerStr = String(h || '').trim();
+                        if (index === 6 && !headerStr) {
+                            return 'பெயரின் விளக்கம்';
+                        }
+                        return headerStr;
+                    });
+
+                    // Build table headers
+                    const headerRow = document.getElementById('table-headers-row');
+                    headerRow.innerHTML = '';
+                    allHeaders.forEach((h, index) => {
+                        const th = document.createElement('th');
+                        if (index === 6) th.classList.add('col-meaning');
+                        th.textContent = h;
+                        headerRow.appendChild(th);
+                    });
+
+                    // Row data extraction
+                    allRows = [];
+                    for (let i = 1; i < rawData.length; i++) {
+                        const row = [];
+                        let hasData = false;
+                        for (let colIndex = 0; colIndex < 7; colIndex++) {
+                            const cellValue = rawData[i][colIndex];
+                            let valStr = cellValue !== undefined && cellValue !== null ? String(cellValue).trim() : '';
+                            if (valStr) hasData = true;
+                            row.push(valStr);
+                        }
+                        if (hasData) {
+                            allRows.push(row);
+                        }
+                    }
+
+                    fileLoader.style.display = 'none';
+                    fileStatus.textContent = `Workbook loaded successfully on ${new Date().toLocaleTimeString()}.`;
+                    
+                    valTotal.textContent = allRows.length.toLocaleString();
+                    filteredRows = [...allRows];
+                    valFiltered.textContent = filteredRows.length.toLocaleString();
+                    
+                    currentPage = 1;
+                    renderTable();
+                    setupFilters();
+                } catch (err) {
+                    console.error(err);
+                    fileLoader.style.display = 'none';
+                    fileStatus.textContent = `Error loading workbook: ${err.message}`;
+                    alert(`Failed to load Excel file: ${err.message}`);
+                }
+            }, 100);
+        }
+
+        // Render paginated data rows
+        function renderTable() {
+            tableBody.innerHTML = '';
+            
+            if (filteredRows.length === 0) {
+                const tr = document.createElement('tr');
+                const td = document.createElement('td');
+                td.colSpan = 7;
+                td.style.textAlign = 'center';
+                td.style.padding = '3rem';
+                td.style.color = 'var(--text-secondary)';
+                td.textContent = 'No matching rows found.';
+                tr.appendChild(td);
+                tableBody.appendChild(tr);
+                
+                rowInfoText.textContent = 'Showing rows 0-0 of 0';
+                pageIndicator.textContent = 'Page 1 of 1';
+                disablePaginationButtons();
+                return;
+            }
+
+            const startIdx = (currentPage - 1) * rowsPerPage;
+            const endIdx = Math.min(startIdx + rowsPerPage, filteredRows.length);
+            
+            for (let i = startIdx; i < endIdx; i++) {
+                const tr = document.createElement('tr');
+                const rowData = filteredRows[i];
+                
+                rowData.forEach((val, colIndex) => {
+                    const td = document.createElement('td');
+                    if (colIndex === 6) {
+                        td.classList.add('meaning-cell');
+                    }
+                    td.textContent = val;
+                    tr.appendChild(td);
+                });
+                tableBody.appendChild(tr);
+            }
+
+            rowInfoText.textContent = `Showing rows ${(startIdx + 1).toLocaleString()}-${endIdx.toLocaleString()} of ${filteredRows.length.toLocaleString()}`;
+            
+            const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+            pageIndicator.textContent = `Page ${currentPage.toLocaleString()} of ${totalPages.toLocaleString()}`;
+            
+            updatePaginationButtons(totalPages);
+        }
+
+        // Apply filters instantly
+        function applyFilters() {
+            filteredRows = allRows.filter(row => {
+                for (let colIndex = 0; colIndex < 7; colIndex++) {
+                    const filterText = columnFilters[colIndex];
+                    if (!filterText) continue;
+                    
+                    const cellValue = String(row[colIndex] || '').toLowerCase();
+                    if (!cellValue.includes(filterText)) {
+                        return false;
+                    }
+                }
+                return true;
+            });
+
+            valFiltered.textContent = filteredRows.length.toLocaleString();
+            currentPage = 1;
+            renderTable();
+        }
+
+        // Setup filter input listeners
+        function setupFilters() {
+            const filterInputs = document.querySelectorAll('.filter-input');
+            filterInputs.forEach(input => {
+                input.addEventListener('input', (e) => {
+                    const colIndex = parseInt(e.target.getAttribute('data-col'), 10);
+                    columnFilters[colIndex] = e.target.value.toLowerCase().trim();
+                    applyFilters();
+                });
+            });
+        }
+
+        // Pagination buttons logic
+        function disablePaginationButtons() {
+            btnFirst.disabled = true;
+            btnPrev.disabled = true;
+            btnNext.disabled = true;
+            btnLast.disabled = true;
+        }
+
+        function updatePaginationButtons(totalPages) {
+            btnFirst.disabled = currentPage === 1;
+            btnPrev.disabled = currentPage === 1;
+            btnNext.disabled = currentPage === totalPages;
+            btnLast.disabled = currentPage === totalPages;
+        }
+
+        btnFirst.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage = 1;
+                renderTable();
+            }
+        });
+
+        btnPrev.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+            }
+        });
+
+        btnNext.addEventListener('click', () => {
+            const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderTable();
+            }
+        });
+
+        btnLast.addEventListener('click', () => {
+            const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+            if (currentPage < totalPages) {
+                currentPage = totalPages;
+                renderTable();
+            }
+        });
+    </script>
+</body>
+</html>

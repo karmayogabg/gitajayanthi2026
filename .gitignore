@@ -1,0 +1,8 @@
+node_modules/
+*.bak
+*:Zone.Identifier
+*.tmp
+.DS_Store
+*.xlsx
+meanings_cache.json
+namma_sami_namma_kovil_complete_all.json

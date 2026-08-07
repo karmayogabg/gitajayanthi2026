@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>நம்ம சாமி நம்ம கோவில் - Tamil Names & Meanings Explorer (62,526 Records)</title>
+    <meta name="description" content="Explore and search 62,526 ancient Tamil names and meanings from Namma Sami Namma Kovil database.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Sans+Tamil:wght@400;600;700&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="index.html" class="brand">
+                <div class="brand-logo">
+                    <i data-lucide="sparkles"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>நம்ம சாமி நம்ம கோவில்</h1>
+                    <p>Tamil Name Meanings & Sevai Explorer</p>
+                </div>
+            </a>
+            <div class="brand-badge">
+                <i data-lucide="database" style="width:14px; height:14px; display:inline-block; vertical-align:middle; margin-right:4px;"></i>
+                62,526 Dataset Records
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        
+        <!-- Hero Stats Section -->
+        <section class="hero">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="stat-total">62,526</div>
+                        <div class="stat-label">Total Registered Names</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="color:var(--accent-secondary);">
+                        <i data-lucide="book-open"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="stat-unique">--</div>
+                        <div class="stat-label">Unique Tamil Names</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="color:var(--accent-gold);">
+                        <i data-lucide="map-pin"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="stat-districts">--</div>
+                        <div class="stat-label">Districts & Regions</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="color:var(--accent-green);">
+                        <i data-lucide="check-circle-2"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Meaning Coverage</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Control Panel -->
+        <section class="controls-panel">
+            <div class="search-box-wrapper">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="search-input" class="search-input" placeholder="Search by Tamil Name, Phone, District, Union, or Meaning..." autocomplete="off">
+                <button id="search-clear" class="search-clear" title="Clear Search">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <div class="filters-row">
+                <select id="filter-region" class="select-custom">
+                    <option value="">All Regions / மண்டலம்</option>
+                </select>
+
+                <select id="filter-district" class="select-custom">
+                    <option value="">All Districts / மாவட்டம்</option>
+                </select>
+
+                <select id="filter-page-size" class="select-custom" style="min-width: 130px; margin-left: auto;">
+                    <option value="48">48 per page</option>
+                    <option value="96">96 per page</option>
+                    <option value="200">200 per page</option>
+                </select>
+            </div>
+
+            <!-- Tamil Alphabet Quick Filter -->
+            <div class="alphabet-bar" id="alphabet-bar">
+                <span class="alphabet-label">Quick Letter Filter:</span>
+                <button class="chip-btn active" data-letter="">All</button>
+                <button class="chip-btn" data-letter="அ">அ</button>
+                <button class="chip-btn" data-letter="ஆ">ஆ</button>
+                <button class="chip-btn" data-letter="இ">இ</button>
+                <button class="chip-btn" data-letter="ஈ">ஈ</button>
+                <button class="chip-btn" data-letter="உ">உ</button>
+                <button class="chip-btn" data-letter="எ">எ</button>
+                <button class="chip-btn" data-letter="க">க</button>
+                <button class="chip-btn" data-letter="சா">சா</button>
+                <button class="chip-btn" data-letter="தா">தா</button>
+                <button class="chip-btn" data-letter="நா">நா</button>
+                <button class="chip-btn" data-letter="பா">பா</button>
+                <button class="chip-btn" data-letter="மா">மா</button>
+                <button class="chip-btn" data-letter="ரா">ரா</button>
+                <button class="chip-btn" data-letter="வா">வா</button>
+            </div>
+        </section>
+
+        <!-- Results Summary Bar -->
+        <div class="results-header">
+            <div class="results-count" id="results-count">
+                Showing <strong>0</strong> names
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">
+                Click any name card to view full detail & copy Tamil meaning
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-spinner" class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading 62,526 Tamil Name Meanings dataset...</p>
+        </div>
+
+        <!-- Data Cards Grid -->
+        <div id="cards-grid" class="cards-grid" style="display: none;"></div>
+
+        <!-- Pagination Bar -->
+        <div id="pagination" class="pagination" style="display: none;">
+            <button id="btn-prev" class="page-btn">
+                <i data-lucide="chevron-left" style="width:16px; height:16px; vertical-align:middle;"></i> Previous
+            </button>
+            <span id="page-info" class="page-info">Page 1 of 1</span>
+            <button id="btn-next" class="page-btn">
+                Next <i data-lucide="chevron-right" style="width:16px; height:16px; vertical-align:middle;"></i>
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Detail Modal -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <button id="modal-close" class="modal-close">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-name" id="modal-name">---</div>
+            <div style="font-size: 0.88rem; color: var(--text-muted); display:flex; gap:16px; flex-wrap:wrap; margin-bottom:12px;">
+                <span id="modal-region"></span>
+                <span id="modal-district"></span>
+                <span id="modal-union"></span>
+            </div>
+            
+            <div class="modal-meaning-box" id="modal-meaning">
+                ---
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:12px;">
+                <button id="modal-copy-btn" class="copy-btn" style="padding:10px 20px; font-size:0.9rem;">
+                    <i data-lucide="copy" style="width:16px; height:16px;"></i> Copy Tamil Meaning
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Alert -->
+    <div id="toast" class="toast">
+        Meaning copied to clipboard!
+    </div>
+
+    <!-- Application Script -->
+    <script src="dashboard.js"></script>
+</body>
+</html>
