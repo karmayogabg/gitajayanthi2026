@@ -2,6 +2,7 @@ ffmpeg
 ffprobe
 *.wav
 *.Zone.Identifier
+*:Zone.Identifier
 node_modules/
 *.ttf
 generate_18_pdfs.js
