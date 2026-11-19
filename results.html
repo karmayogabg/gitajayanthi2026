@@ -1176,7 +1176,7 @@
 
                     <!-- Sorting Dropdown (Default by High-level City) -->
                     <div>
-                        <select class="filter-select" id="sortFilter" aria-label="Sort By">
+                        <select class="filter-select" id="sortFilter" autocomplete="off" aria-label="Sort By">
                             <option value="highlevel_city_asc" selected>🏙️ வரிசை: முக்கிய நகரம் (A → Z) [Default]</option>
                             <option value="city_asc">📍 வரிசை: பதிவுசெய்த ஊர் (A → Z)</option>
                             <option value="name_asc">பெயர் (Name: A → Z)</option>
@@ -1195,23 +1195,23 @@
                     <div style="font-size: 1.8rem; line-height: 1;">📊</div>
                     <div>
                         <div class="tamil-text" style="font-weight: 800; font-size: 1.05rem; color: #065f46;">
-                            வடிகட்டப்பட்ட முடிவுகளை ஏற்றுமதி செய் (Export Filtered &amp; Sorted Data)
+                            வடிகட்டப்பட்ட முடிவுகளைப் பதிவிறக்கு (Download Filtered &amp; Sorted Data)
                         </div>
                         <div class="tamil-text" style="font-size: 0.86rem; color: #047857; margin-top: 2px;" id="exportSummaryText">
-                            தற்போது தேர்ந்தெடுக்கப்பட்ட வடிகட்டல்களின்படி பதிவுகள் வரிசைப்படுத்தப்பட்டு ஏற்றுமதிக்குத் தயாராக உள்ளன.
+                            தற்போது தேர்ந்தெடுக்கப்பட்ட வடிகட்டல்களின்படி பதிவுகள் வரிசைப்படுத்தப்பட்டு பதிவிறக்கத்திற்குத் தயாராக உள்ளன.
                         </div>
                     </div>
                 </div>
 
                 <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                    <button class="btn" onclick="exportToExcel()" style="background: #10b981; color: white; font-weight: 700; padding: 10px 20px; border-radius: 8px; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); border: 1px solid #059669; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
-                        <span>📥</span> எக்செல் ஏற்றுமதி (.xlsx)
+                    <button class="btn" onclick="exportToExcel()" style="background: #10b981; color: white; font-weight: 700; padding: 10px 18px; border-radius: 8px; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); border: 1px solid #059669; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;" title="வடிகட்டப்பட்ட பதிவுகளை மட்டும் எக்செல் கோப்பாகப் பதிவிறக்கும்">
+                        <span>📥</span> எக்செல் பதிவிறக்கம் (.xlsx)
                     </button>
-                    <a href="gita_jayanthi_2026_full_results.xlsx" download="கீதா_ஜயந்தி_2026_முழுமையான_முடிவுகள்.xlsx" class="btn" style="background: #2563eb; color: white; font-weight: 700; padding: 10px 18px; border-radius: 8px; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);" title="அனைத்துப் போட்டிகள் மற்றும் வயதுப் பிரிவுகளுடன் கூடிய 7 தாள்கள் அடங்கிய முழுமையான எக்செல் தொகுப்பு">
-                        <span>📚</span> முழு தொகுப்பு (.xlsx)
-                    </a>
-                    <button class="btn" onclick="exportToCSV()" style="background: var(--card-bg); color: #065f46; border: 1.5px solid #10b981; font-weight: 700; padding: 10px 18px; border-radius: 8px; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
-                        <span>📄</span> CSV ஏற்றுமதி (.csv)
+                    <button class="btn" onclick="exportFullWorkbook()" style="background: #2563eb; color: white; font-weight: 700; padding: 10px 18px; border-radius: 8px; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); border: 1px solid #1d4ed8;" title="அனைத்துப் போட்டிகள், பால/தருண வயதுப் பிரிவுகள் மற்றும் நகரங்களின் சுருக்கம் என 7 தனித்தனி தாள்களுடன் கூடிய முழுமையான எக்செல் கோப்பு">
+                        <span>📚</span> முழுத் தொகுப்பு (.xlsx - 7 தாள்கள்)
+                    </button>
+                    <button class="btn" onclick="exportToCSV()" style="background: var(--card-bg); color: #065f46; border: 1.5px solid #10b981; font-weight: 700; padding: 10px 18px; border-radius: 8px; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;" title="வடிகட்டப்பட்ட பதிவுகளை CSV கோப்பாகப் பதிவிறக்கும்">
+                        <span>📄</span> CSV பதிவிறக்கம் (.csv)
                     </button>
                     <button id="resetOverridesBtn" class="btn btn-secondary" onclick="resetCityOverrides()" style="display: none; padding: 10px 14px; font-size: 0.88rem; border: 1.5px dashed #ef4444; color: #dc2626; font-weight: 600;">
                         🔄 ஊர் திருத்தங்களை மீட்டமை (<span id="overrideCount">0</span>)
@@ -1460,6 +1460,12 @@
             populateCityFilter();
             updateStatsCounts();
             setupEventListeners();
+
+            // Guarantee Default Sort by High-Level City (A -> Z)
+            currentSort = "highlevel_city_asc";
+            const sortEl = document.getElementById("sortFilter");
+            if (sortEl) sortEl.value = "highlevel_city_asc";
+
             render();
         });
 
@@ -1859,7 +1865,7 @@
             // Update export summary text dynamically
             const exportTextEl = document.getElementById("exportSummaryText");
             if (exportTextEl) {
-                exportTextEl.innerHTML = `தற்போது தேர்ந்தெடுக்கப்பட்ட வடிகட்டல்களின்படி <b>${filtered.length}</b> பதிவுகள் வரிசைப்படுத்தப்பட்டு ஏற்றுமதிக்குத் தயாராக உள்ளன.`;
+                exportTextEl.innerHTML = `தற்போது தேர்ந்தெடுக்கப்பட்ட வடிகட்டல்களின்படி <b>${filtered.length}</b> பதிவுகள் வரிசைப்படுத்தப்பட்டு பதிவிறக்கத்திற்குத் தயாராக உள்ளன.`;
             }
 
             // Pagination calculation
@@ -2190,7 +2196,7 @@
         function exportToExcel() {
             const data = getFilteredData();
             if (data.length === 0) {
-                alert("ஏற்றுமதி செய்வதற்கு பதிவுகள் எதுவும் இல்லை (No records matching filters).");
+                alert("பதிவிறக்கம் செய்வதற்கு பதிவுகள் எதுவும் இல்லை (No records matching filters).");
                 return;
             }
 
@@ -2254,11 +2260,142 @@
             XLSX.writeFile(wb, fileName);
         }
 
+        // Export complete multi-sheet workbook with all 7 competition/summary sheets directly in browser
+        function exportFullWorkbook() {
+            if (typeof XLSX === "undefined") {
+                alert("Excel நூலகம் ஏற்றப்படுகிறது, தயவுசெய்து சற்று நேரத்தில் மீண்டும் முயற்சிக்கவும்.");
+                return;
+            }
+
+            const headers = [
+                "வரிசை எண் (#)",
+                "Excel Row",
+                "பதிவு நேரம் (Timestamp)",
+                "பெயர் (Name)",
+                "வயது (Age)",
+                "வயதுப் பிரிவு (Age Category)",
+                "வாட்ஸ்அப் எண் (Phone Number)",
+                "மின்னஞ்சல் முகவரி (Email Address)",
+                "பதிவுசெய்த ஊர் (Raw City)",
+                "முக்கிய நகரம் (High-level City)",
+                "பங்கேற்கும் போட்டி (Registered Competition)",
+                "ஶ்லோக விளக்கம் - தேர்ந்தெடுத்த ஶ்லோகம் (Selected Shloka)",
+                "குழு உறுப்பினர்களின் விபரங்கள் (Team Details)",
+                "கட்டண விபரம் / Txn ID (Payment Info)",
+                "வினாடி வினா - தேர்ந்தெடுத்த அத்யாயங்கள் (Quiz Chapters)"
+            ];
+
+            function formatRows(records) {
+                const rows = [headers];
+                records.forEach((r, idx) => {
+                    rows.push([
+                        idx + 1,
+                        r.excelRow,
+                        r.timestamp || r.rawTimestamp || "",
+                        r.name || "",
+                        r.age !== null ? r.age : "",
+                        r.ageGroup === "under15" ? "பால பிரிவு (< 15)" : "தருண பிரிவு (>= 15)",
+                        r.phone || r.rawPhone || "",
+                        r.email || "",
+                        r.city || "",
+                        r.highLevelCity || "",
+                        r.competition || r.compTitle || "",
+                        r.shloka || "",
+                        r.teamDetails || "",
+                        r.payment || "",
+                        r.quizChapters || ""
+                    ]);
+                });
+                return rows;
+            }
+
+            const colWidths = [
+                { wch: 12 }, { wch: 10 }, { wch: 22 }, { wch: 28 }, { wch: 10 },
+                { wch: 22 }, { wch: 18 }, { wch: 28 }, { wch: 20 }, { wch: 24 }, { wch: 38 },
+                { wch: 45 }, { wch: 38 }, { wch: 28 }, { wch: 38 }
+            ];
+
+            const sortedAll = [...registrationsData].sort((a, b) => {
+                const hA = (a.highLevelCity || "").trim();
+                const hB = (b.highLevelCity || "").trim();
+                if (!hA && hB) return 1;
+                if (hA && !hB) return -1;
+                const diffH = hA.localeCompare(hB, undefined, { sensitivity: 'base' });
+                if (diffH !== 0) return diffH;
+                const cA = (a.city || "").trim();
+                const cB = (b.city || "").trim();
+                if (!cA && cB) return 1;
+                if (cA && !cB) return -1;
+                const diffC = cA.localeCompare(cB, undefined, { sensitivity: 'base' });
+                if (diffC !== 0) return diffC;
+                return a.name.localeCompare(b.name);
+            });
+
+            const wb = XLSX.utils.book_new();
+
+            // Sheet 1: All 764
+            const wsAll = XLSX.utils.aoa_to_sheet(formatRows(sortedAll));
+            wsAll['!cols'] = colWidths;
+            XLSX.utils.book_append_sheet(wb, wsAll, "முழு பட்டியல் (764)");
+
+            // Sheet 2: Comp 1 Bala (< 15)
+            const comp1Bala = sortedAll.filter(r => (r.compId === "comp1_ind" || r.compId === "comp1_team") && r.age !== null && r.age < 15);
+            const wsComp1Bala = XLSX.utils.aoa_to_sheet(formatRows(comp1Bala));
+            wsComp1Bala['!cols'] = colWidths;
+            XLSX.utils.book_append_sheet(wb, wsComp1Bala, "போட்டி 1 (பால <15)");
+
+            // Sheet 3: Comp 1 Taruna (>= 15)
+            const comp1Taruna = sortedAll.filter(r => (r.compId === "comp1_ind" || r.compId === "comp1_team") && (r.age === null || r.age >= 15));
+            const wsComp1Taruna = XLSX.utils.aoa_to_sheet(formatRows(comp1Taruna));
+            wsComp1Taruna['!cols'] = colWidths;
+            XLSX.utils.book_append_sheet(wb, wsComp1Taruna, "போட்டி 1 (தருண >=15)");
+
+            // Sheet 4: Comp 2 Quiz
+            const comp2 = sortedAll.filter(r => r.compId === "comp2");
+            const wsComp2 = XLSX.utils.aoa_to_sheet(formatRows(comp2));
+            wsComp2['!cols'] = colWidths;
+            XLSX.utils.book_append_sheet(wb, wsComp2, "போட்டி 2 (விநாடி வினா)");
+
+            // Sheet 5: Comp 3 Verse Explanation
+            const comp3 = sortedAll.filter(r => r.compId === "comp3");
+            const wsComp3 = XLSX.utils.aoa_to_sheet(formatRows(comp3));
+            wsComp3['!cols'] = colWidths;
+            XLSX.utils.book_append_sheet(wb, wsComp3, "போட்டி 3 (ஶ்லோக விளக்கம்)");
+
+            // Sheet 6: Comp 4 Pronunciation
+            const comp4 = sortedAll.filter(r => r.compId === "comp4");
+            const wsComp4 = XLSX.utils.aoa_to_sheet(formatRows(comp4));
+            wsComp4['!cols'] = colWidths;
+            XLSX.utils.book_append_sheet(wb, wsComp4, "போட்டி 4 (உச்சரிப்பு)");
+
+            // Sheet 7: City Summary
+            const citySummary = {};
+            sortedAll.forEach(r => {
+                const h = r.highLevelCity || "Other";
+                citySummary[h] = (citySummary[h] || 0) + 1;
+            });
+            const summaryRows = [
+                ["முக்கிய நகரம் (High-level City)", "பதிவுகளின் எண்ணிக்கை (Count)", "சதவீதம் (Percentage)"]
+            ];
+            Object.entries(citySummary)
+                .sort((a, b) => b[1] - a[1])
+                .forEach(([c, cnt]) => {
+                    summaryRows.push([c, cnt, ((cnt / registrationsData.length) * 100).toFixed(1) + "%"]);
+                });
+            summaryRows.push(["மொத்தம் (Total)", registrationsData.length, "100%"]);
+
+            const wsSummary = XLSX.utils.aoa_to_sheet(summaryRows);
+            wsSummary['!cols'] = [{ wch: 30 }, { wch: 25 }, { wch: 20 }];
+            XLSX.utils.book_append_sheet(wb, wsSummary, "நகரங்கள் சுருக்கம்");
+
+            XLSX.writeFile(wb, "கீதா_ஜயந்தி_2026_முழு_முடிவுகள்_7_தாள்கள்.xlsx");
+        }
+
         // Export current filtered & sorted view to CSV (with UTF-8 BOM for perfect Excel Tamil rendering)
         function exportToCSV() {
             const data = getFilteredData();
             if (data.length === 0) {
-                alert("ஏற்றுமதி செய்வதற்கு பதிவுகள் எதுவும் இல்லை (No records matching filters).");
+                alert("பதிவிறக்கம் செய்வதற்கு பதிவுகள் எதுவும் இல்லை (No records matching filters).");
                 return;
             }
 
