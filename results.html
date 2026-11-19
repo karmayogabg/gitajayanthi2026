@@ -344,7 +344,111 @@
             opacity: 0.9;
         }
 
-        /* Age Group & Team Sub-Filters Bar */
+        /* 2. Age Group Tabs Section - Dedicated Distinct Border & Color */
+        .age-tabs-container {
+            background: var(--card-bg);
+            border: 2.5px solid #2563eb;
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.08);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.04), rgba(59, 130, 246, 0.01));
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+        }
+
+        .dark-theme .age-tabs-container {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(59, 130, 246, 0.04));
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .age-section-label {
+            font-size: 0.95rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #1d4ed8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dark-theme .age-section-label {
+            color: #60a5fa;
+        }
+
+        .age-group-toggle {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: thin;
+            flex-wrap: wrap;
+        }
+
+        .age-btn {
+            background: var(--card-bg);
+            border: 2px solid #93c5fd;
+            padding: 9px 16px;
+            border-radius: 9px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .dark-theme .age-btn {
+            border-color: #1e40af;
+            background: var(--card-bg);
+        }
+
+        .age-btn:hover {
+            border-color: #2563eb;
+            background: rgba(37, 99, 235, 0.08);
+            color: #1d4ed8;
+        }
+
+        .dark-theme .age-btn:hover {
+            border-color: #60a5fa;
+            background: rgba(59, 130, 246, 0.15);
+            color: #93c5fd;
+        }
+
+        .age-btn.active {
+            background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
+            color: #ffffff !important;
+            border-color: #1e3a8a !important;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+        }
+
+        .age-btn .count {
+            font-size: 0.78rem;
+            padding: 2px 7px;
+            border-radius: 10px;
+            background: rgba(37, 99, 235, 0.12);
+            color: #1d4ed8;
+            font-weight: 700;
+        }
+
+        .dark-theme .age-btn .count {
+            background: rgba(96, 165, 250, 0.2);
+            color: #bfdbfe;
+        }
+
+        .age-btn.active .count {
+            background: rgba(255, 255, 255, 0.25) !important;
+            color: #ffffff !important;
+        }
+
+        /* Filter Controls Card (Search, Location, Payment, Sort) */
         .filter-controls-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -361,52 +465,6 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 15px;
-        }
-
-        .age-group-toggle {
-            display: inline-flex;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 4px;
-            gap: 4px;
-            flex-wrap: wrap;
-        }
-
-        .age-btn {
-            padding: 7px 15px;
-            border-radius: 7px;
-            border: none;
-            background: none;
-            font-weight: 600;
-            font-size: 0.88rem;
-            cursor: pointer;
-            color: var(--text);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .age-btn:hover {
-            background: rgba(217, 119, 6, 0.08);
-        }
-
-        .age-btn.active {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 2px 6px rgba(217, 119, 6, 0.25);
-        }
-
-        .age-btn .count {
-            font-size: 0.76rem;
-            padding: 1px 6px;
-            border-radius: 10px;
-            background: rgba(0,0,0,0.1);
-        }
-
-        .age-btn.active .count {
-            background: rgba(255,255,255,0.25);
         }
 
         /* Search and Secondary Filter Grid */
@@ -987,52 +1045,52 @@
                 </div>
             </div>
 
-            <!-- 2. AGE GROUP & FILTER CONTROLS CARD -->
-            <div class="filter-controls-card">
-                <div class="filters-row">
-                    <!-- Age Group Toggle (< 15 vs >= 15) -->
-                    <div>
-                        <div class="section-label tamil-text" style="margin-bottom: 6px;">
-                            👥 2. வயதுப் பிரிவு (Age Group):
-                        </div>
-                        <div class="age-group-toggle" id="ageGroupToggle">
-                            <button class="age-btn active" data-age="all">
-                                <span>அனைத்து வயது</span>
-                                <span class="count" id="count-age-all">764</span>
-                            </button>
-                            <button class="age-btn" data-age="under15">
-                                <span>🧒 பால பிரிவு (வயது &lt; 15)</span>
-                                <span class="count" id="count-age-under15">563</span>
-                            </button>
-                            <button class="age-btn" data-age="above15">
-                                <span>🧑 தருண பிரிவு (வயது ≥ 15)</span>
-                                <span class="count" id="count-age-above15">201</span>
-                            </button>
-                            <button class="age-btn" data-age="under7" title="Special Children Category">
-                                <span>👶 &lt; 7 வயது</span>
-                                <span class="count" id="count-age-under7">0</span>
-                            </button>
-                            <button class="age-btn" data-age="above70" title="Senior Citizens Category">
-                                <span>👴 &gt; 70 வயது</span>
-                                <span class="count" id="count-age-above70">0</span>
-                            </button>
-                        </div>
+            <!-- 2. AGE GROUP TABS CONTAINER (DISTINCT BLUE BORDER & STYLING) -->
+            <div class="age-tabs-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <div class="age-section-label tamil-text">
+                        👥 2. வயதுப் பிரிவு (Age Group Selection):
                     </div>
-
                     <!-- Sub-competition filter for Comp 1 (Individual vs Team) -->
                     <div id="comp1SubFilterWrapper" style="display: none;">
-                        <div class="section-label tamil-text" style="margin-bottom: 6px;">
-                            பங்கேற்பு முறை (Type):
-                        </div>
-                        <div class="age-group-toggle" id="comp1SubFilter">
-                            <button class="age-btn active" data-subcomp="all">அனைத்தும்</button>
-                            <button class="age-btn" data-subcomp="comp1_ind">தனிநபர் (Individual)</button>
-                            <button class="age-btn" data-subcomp="comp1_team">குழுவாரி (Team of 5)</button>
+                        <span style="font-size: 0.85rem; font-weight: 700; color: #1d4ed8; margin-right: 6px;">பங்கேற்பு முறை:</span>
+                        <div class="age-group-toggle" id="comp1SubFilter" style="display: inline-flex;">
+                            <button class="age-btn active" data-subcomp="all" style="padding: 5px 12px; font-size: 0.82rem;">அனைத்தும்</button>
+                            <button class="age-btn" data-subcomp="comp1_ind" style="padding: 5px 12px; font-size: 0.82rem;">தனிநபர்</button>
+                            <button class="age-btn" data-subcomp="comp1_team" style="padding: 5px 12px; font-size: 0.82rem;">குழுவாரி</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Search and Secondary Dropdown Filters -->
+                <div class="age-group-toggle" id="ageGroupToggle">
+                    <button class="age-btn active" data-age="all">
+                        <span>அனைத்து வயது (All Ages)</span>
+                        <span class="count" id="count-age-all">764</span>
+                    </button>
+                    <button class="age-btn" data-age="under15">
+                        <span>🧒 பால பிரிவு (வயது &lt; 15 ஆண்டுகள்)</span>
+                        <span class="count" id="count-age-under15">563</span>
+                    </button>
+                    <button class="age-btn" data-age="above15">
+                        <span>🧑 தருண பிரிவு (வயது ≥ 15 ஆண்டுகள்)</span>
+                        <span class="count" id="count-age-above15">201</span>
+                    </button>
+                    <button class="age-btn" data-age="under7" title="Special Children Category">
+                        <span>👶 &lt; 7 வயது (விஶேஷ பால பிரிவு)</span>
+                        <span class="count" id="count-age-under7">0</span>
+                    </button>
+                    <button class="age-btn" data-age="above70" title="Senior Citizens Category">
+                        <span>👴 &gt; 70 வயது (விஶேஷ மூத்தோர் பிரிவு)</span>
+                        <span class="count" id="count-age-above70">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. SEARCH & SECONDARY FILTERS CARD -->
+            <div class="filter-controls-card">
+                <div class="section-label tamil-text" style="margin-bottom: 12px; color: var(--text); opacity: 0.85; font-size: 0.85rem;">
+                    🔍 3. தேடல், ஊர் &amp; வடிப்பான்கள் (Search &amp; Filters):
+                </div>
                 <div class="search-filters-grid">
                     <!-- Text Search -->
                     <div class="search-box-wrapper">
@@ -1056,15 +1114,15 @@
                         </select>
                     </div>
 
-                    <!-- Sorting Dropdown -->
+                    <!-- Sorting Dropdown (Default by City) -->
                     <div>
                         <select class="filter-select" id="sortFilter" aria-label="Sort By">
-                            <option value="default">வரிசை: பதிவு வரிசைப்படி</option>
-                            <option value="name_asc">பெயர் (A → Z)</option>
-                            <option value="name_desc">பெயர் (Z → A)</option>
-                            <option value="age_asc">வயது (குறைந்தது → அதிகம்)</option>
-                            <option value="age_desc">வயது (அதிகம் → குறைந்தது)</option>
-                            <option value="city_asc">ஊர் (A → Z)</option>
+                            <option value="city_asc" selected>📍 வரிசை: ஊர் / City (A → Z) [Default]</option>
+                            <option value="name_asc">பெயர் (Name: A → Z)</option>
+                            <option value="name_desc">பெயர் (Name: Z → A)</option>
+                            <option value="age_asc">வயது (Age: குறைந்தது → அதிகம்)</option>
+                            <option value="age_desc">வயது (Age: அதிகம் → குறைந்தது)</option>
+                            <option value="reg_seq">பதிவு வரிசைப்படி (Registration Order)</option>
                         </select>
                     </div>
                 </div>
@@ -1255,7 +1313,7 @@
         let currentCity = "all";
         let currentPayment = "all";
         let searchQuery = "";
-        let currentSort = "default";
+        let currentSort = "city_asc";
         let viewMode = "table"; // 'table' or 'card'
         let currentPage = 1;
         let pageSize = 50;
@@ -1493,12 +1551,21 @@
 
                 return true;
             }).sort((a, b) => {
+                if (currentSort === "city_asc" || currentSort === "default") {
+                    const cA = (a.city || "").trim();
+                    const cB = (b.city || "").trim();
+                    if (!cA && cB) return 1;
+                    if (cA && !cB) return -1;
+                    const cityDiff = cA.localeCompare(cB, undefined, { sensitivity: 'base' });
+                    if (cityDiff !== 0) return cityDiff;
+                    return a.name.localeCompare(b.name);
+                }
                 if (currentSort === "name_asc") return a.name.localeCompare(b.name);
                 if (currentSort === "name_desc") return b.name.localeCompare(a.name);
                 if (currentSort === "age_asc") return (a.age || 0) - (b.age || 0);
                 if (currentSort === "age_desc") return (b.age || 0) - (a.age || 0);
-                if (currentSort === "city_asc") return (a.city || "").localeCompare(b.city || "");
-                return a.id - b.id; // default registration sequence
+                if (currentSort === "reg_seq") return a.id - b.id;
+                return (a.city || "").localeCompare(b.city || "");
             });
         }
 
@@ -1713,12 +1780,12 @@
             currentCity = "all";
             currentPayment = "all";
             searchQuery = "";
-            currentSort = "default";
+            currentSort = "city_asc";
 
             document.getElementById("searchInput").value = "";
             document.getElementById("cityFilter").value = "all";
             document.getElementById("paymentFilter").value = "all";
-            document.getElementById("sortFilter").value = "default";
+            document.getElementById("sortFilter").value = "city_asc";
 
             document.querySelectorAll("#compTabs .comp-tab").forEach(t => t.classList.remove("active"));
             document.querySelector("#compTabs .comp-tab[data-comp='all']").classList.add("active");
