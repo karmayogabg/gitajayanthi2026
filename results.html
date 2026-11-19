@@ -1007,8 +1007,8 @@
                 <a href="index.html" class="btn btn-secondary tamil-text">
                     ← முகப்பு (Home Page)
                 </a>
-                <button class="btn btn-primary" onclick="exportToCSV()">
-                    📥 CSV பதிவிறக்கம்
+                <button class="btn btn-primary" onclick="exportToExcel()">
+                    📥 எக்செல் பதிவிறக்கம் (.xlsx)
                 </button>
                 <button class="btn btn-secondary" onclick="window.print()">
                     🖨️ அச்சிடு
@@ -1210,14 +1210,8 @@
                     <button class="btn" onclick="exportFullWorkbook()" style="background: #2563eb; color: white; font-weight: 700; padding: 10px 18px; border-radius: 8px; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); border: 1px solid #1d4ed8;" title="அனைத்துப் போட்டிகள், பால/தருண வயதுப் பிரிவுகள் மற்றும் நகரங்களின் சுருக்கம் என 7 தனித்தனி தாள்களுடன் கூடிய முழுமையான எக்செல் கோப்பு">
                         <span>📚</span> முழுத் தொகுப்பு (.xlsx - 7 தாள்கள்)
                     </button>
-                    <button class="btn" onclick="exportToCSV()" style="background: var(--card-bg); color: #065f46; border: 1.5px solid #10b981; font-weight: 700; padding: 10px 18px; border-radius: 8px; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;" title="வடிகட்டப்பட்ட பதிவுகளை CSV கோப்பாகப் பதிவிறக்கும்">
-                        <span>📄</span> CSV பதிவிறக்கம் (.csv)
-                    </button>
                     <button id="resetOverridesBtn" class="btn btn-secondary" onclick="resetCityOverrides()" style="display: none; padding: 10px 14px; font-size: 0.88rem; border: 1.5px dashed #ef4444; color: #dc2626; font-weight: 600;">
                         🔄 ஊர் திருத்தங்களை மீட்டமை (<span id="overrideCount">0</span>)
-                    </button>
-                    <button class="btn btn-secondary" onclick="resetFilters()" style="padding: 10px 16px; font-size: 0.88rem;">
-                        🔄 வடிப்பான்களை மீட்டமை
                     </button>
                 </div>
             </div>
@@ -1293,7 +1287,7 @@
                 <div class="empty-state-icon">🔍</div>
                 <h3 class="tamil-text" style="color: var(--primary); margin-bottom: 8px;">பொருந்தும் பதிவுகள் எதுவும் காணப்படவில்லை</h3>
                 <p class="tamil-text" style="opacity: 0.8; margin-bottom: 15px;">நீங்கள் உள்ளிட்ட தேடல் அல்லது வடிப்பானுக்கு ஏற்ற முடிவுகள் இல்லை.</p>
-                <button class="btn btn-secondary tamil-text" onclick="resetFilters()">வடிப்பான்களை மீட்டமை (Reset Filters)</button>
+                <button class="btn btn-secondary tamil-text" onclick="resetFilters()">அனைத்து பதிவுகளையும் காட்டு (Show All Records)</button>
             </div>
 
             <!-- 6. PAGINATION CONTROLS -->
@@ -2201,8 +2195,7 @@
             }
 
             if (typeof XLSX === "undefined") {
-                // If SheetJS is unavailable, gracefully fall back to CSV
-                exportToCSV();
+                alert("Excel நூலகம் ஏற்றப்படுகிறது, தயவுசெய்து சற்று நேரத்தில் மீண்டும் முயற்சிக்கவும்.");
                 return;
             }
 
